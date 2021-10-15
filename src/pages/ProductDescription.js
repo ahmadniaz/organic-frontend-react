@@ -51,8 +51,6 @@ const ProductDescription = () => {
     const useStyles = makeStyles(theme => ({
         mainDiv: {
             marginTop: '15%',
-            marginRight: '10%',
-            marginLeft: '10%',
             padding: 0,
             overflowX: 'hidden',
             overflowY: 'hidden',

@@ -51,15 +51,17 @@ const ProductItems = () => {
   };
   const getProducts = async () => {
     setLoading(true);
-    const res = await axios.get(`https://strapi-backend-organic.herokuapp.com/products`);
+    const res = await axios.get(
+      `https://strapi-backend-organic.herokuapp.com/products`
+    );
     setProducts(res.data);
     setLoading(false);
     const decimal = products.length / 8 - Math.floor(products.length / 8) !== 0;
     setNoOfPages(
       decimal ? Math.floor(products.length / 8) + 1 : products.length / 8
     );
-};
-useEffect(() => {
+  };
+  useEffect(() => {
     getProducts();
     //eslint-disable-next-line
   }, []);
@@ -80,7 +82,9 @@ useEffect(() => {
     }
     if (clicked) {
       if (category !== "all") {
-        filteredProducts = filteredProducts.filter(product => product.categories[0].name === category)
+        filteredProducts = filteredProducts.filter(
+          (product) => product.categories[0].name === category
+        );
       }
       if (min !== "") {
         filteredProducts = filteredProducts.filter(
