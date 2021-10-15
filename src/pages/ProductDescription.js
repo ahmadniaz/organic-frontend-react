@@ -48,12 +48,9 @@ const ProductDescription = () => {
   const useStyles = makeStyles((theme) => ({
     mainDiv: {
       marginTop: "15%",
-      width: "98%",
-      marginLeft: "auto",
-      marginRight: "auto",
       padding: 0,
-      // overflowX: 'hidden',
-      // overflowY: 'hidden',
+      overflowX: "hidden",
+      overflowY: "hidden",
     },
     productDiv: {
       backgroundColor: " rgba(112,112,112, 0.1)",
@@ -129,87 +126,81 @@ const ProductDescription = () => {
   }));
   const classes = useStyles();
   return (
-    <>
-      <div className={classes.mainDiv}>
-        <Grid container spacing={3} style={{ display: "contents" }}>
-          <div>
-            <h1 className={classes.title}>{curProd && curProd.title}</h1>
-          </div>
-          <div style={{ display: "flex" }}>
-            <Grid item xs={5}>
-              <div className={classes.productDiv}>
-                <img
-                  alt="product1"
-                  src={`https://strapi-backend-organic.herokuapp.com${
-                    curProd && curProd.image.url
-                  }`}
-                  style={{ width: "75%" }}
-                />
+    <div className={classes.mainDiv}>
+      <Grid container spacing={3} style={{ display: "contents" }}>
+        <div>
+          <h1 className={classes.title}>{curProd && curProd.title}</h1>
+        </div>
+        <div style={{ display: "flex" }}>
+          <Grid item xs={5}>
+            <div className={classes.productDiv}>
+              <img
+                alt="product1"
+                src={`https://strapi-backend-organic.herokuapp.com${
+                  curProd && curProd.image.url
+                }`}
+                style={{ width: "75%" }}
+              />
+            </div>
+          </Grid>
+          <Grid item xs={7}>
+            <div className={classes.description}>
+              <div>
+                <h3 className={classes.firstHeading}>Description</h3>
               </div>
-            </Grid>
-            <Grid item xs={7}>
-              <div className={classes.description}>
-                <div>
-                  <h3 className={classes.firstHeading}>Description</h3>
+              <div>
+                <p className={classes.paragraph}>
+                  {curProd && curProd.description}
+                </p>
+              </div>
+              <div style={{ display: "flex" }}>
+                <p className={classes.firstHeading}>Quantity:</p>
+                <div style={{ textAlign: "center" }}>
+                  <RemoveIcon
+                    style={{ cursor: "pointer" }}
+                    onClick={doDecrement}
+                  />
+                  <input
+                    className={classes.input}
+                    type="text"
+                    value={value}
+                    onChange={handleInputChange}
+                  />
+                  <AddIcon
+                    style={{ cursor: "pointer" }}
+                    onClick={doIncrement}
+                  />
                 </div>
-                <div>
-                  <p className={classes.paragraph}>
-                    {curProd && curProd.description}
-                  </p>
-                </div>
-                <div style={{ display: "flex" }}>
-                  <p className={classes.firstHeading}>Quantity:</p>
-                  <div style={{ textAlign: "center" }}>
-                    <RemoveIcon
-                      style={{ cursor: "pointer" }}
-                      onClick={doDecrement}
-                    />
-                    <input
-                      className={classes.input}
-                      type="text"
-                      value={value}
-                      onChange={handleInputChange}
-                    />
-                    <AddIcon
-                      style={{ cursor: "pointer" }}
-                      onClick={doIncrement}
-                    />
-                  </div>
-                </div>
-                <Grid container>
-                  <Grid item xs={3} style={{ marginLeft: "2%" }}>
-                    <h3 className={classes.quantity}>
-                      PRICE:
-                      <span className={classes.span}> ${curProd.price} </span>
-                    </h3>
-                  </Grid>
-                  <Grid
-                    item
-                    xs={4}
-                    style={{ textAlign: "end", marginLeft: "25%" }}
-                  >
-                    <Link className={classes.tab} as={NavLink} to="/cart">
-                      <Button
-                        variant="outlined"
-                        className={classes.button}
-                        onClick={() =>
-                          handleAddToCart(curProd.id, value, total)
-                        }
-                      >
-                        <span> ADD TO CART </span>
-                      </Button>
-                    </Link>
-                  </Grid>
+              </div>
+              <Grid container>
+                <Grid item xs={3} style={{ marginLeft: "2%" }}>
+                  <h3 className={classes.quantity}>
+                    PRICE:
+                    <span className={classes.span}> ${curProd.price} </span>
+                  </h3>
                 </Grid>
-              </div>
-            </Grid>
-          </div>
-        </Grid>
-      </div>
-      <div>
-        <NewsLetter />
-      </div>
-    </>
+                <Grid
+                  item
+                  xs={4}
+                  style={{ textAlign: "end", marginLeft: "25%" }}
+                >
+                  <Link className={classes.tab} as={NavLink} to="/cart">
+                    <Button
+                      variant="outlined"
+                      className={classes.button}
+                      onClick={() => handleAddToCart(curProd.id, value, total)}
+                    >
+                      <span> ADD TO CART </span>
+                    </Button>
+                  </Link>
+                </Grid>
+              </Grid>
+            </div>
+          </Grid>
+        </div>
+      </Grid>
+      <NewsLetter />
+    </div>
   );
 };
 export default ProductDescription;
