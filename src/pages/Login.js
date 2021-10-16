@@ -33,7 +33,7 @@ const clientId =
     const handleSubmit = async (e, timeout=3000) => {
         e.preventDefault();
         try {
-            const response = await fetch("https://strapi-backend-organic.herokuapp.com/auth/local/", {
+            const response = await fetch("http://localhost:1337/auth/local/", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -201,7 +201,7 @@ const clientId =
           <GoogleLogin
             clientId={clientId}
             onClick={() =>
-                (window.location = 'https://strapi-backend-organic.herokuapp.com/connect/google')
+                (window.location = 'http://localhost:1337/connect/google')
               }
             buttonText="Continue With Google"
             onSuccess={onLoginSuccess}

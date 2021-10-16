@@ -42,7 +42,7 @@ const ProductState = (props) => {
 
     const getProducts = async () => {
         try {
-            const res = await axios.get(`https://strapi-backend-organic.herokuapp.com/products`)
+            const res = await axios.get(`http://localhost:1337/products`)
             console.log(res.data, 'in state products')
             dispatch({
                 type: GET_PRODUCTS,
@@ -169,7 +169,7 @@ const ProductState = (props) => {
     const handleAddToCart = async (id, num, total) => {
         try {
             setLoading()
-            const res = await axios.get(`https://strapi-backend-organic.herokuapp.com/products/${id}`)
+            const res = await axios.get(`http://localhost:1337/products/${id}`)
             dispatch({
                 type: ADD_TO_CART,
                 payload: {

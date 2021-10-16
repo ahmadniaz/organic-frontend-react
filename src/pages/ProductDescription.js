@@ -49,6 +49,9 @@ const ProductDescription = () => {
     mainDiv: {
       marginTop: "15%",
       padding: 0,
+      width: "96%",
+      marginRight: "auto",
+      marginLeft: "auto",
       overflowX: "hidden",
       overflowY: "hidden",
     },
@@ -136,7 +139,7 @@ const ProductDescription = () => {
             <div className={classes.productDiv}>
               <img
                 alt="product1"
-                src={`https://strapi-backend-organic.herokuapp.com${
+                src={`http://localhost:1337${
                   curProd && curProd.image.url
                 }`}
                 style={{ width: "75%" }}

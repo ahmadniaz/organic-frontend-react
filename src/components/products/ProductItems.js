@@ -52,7 +52,7 @@ const ProductItems = () => {
   const getProducts = async () => {
     setLoading(true);
     const res = await axios.get(
-      `https://strapi-backend-organic.herokuapp.com/products`
+      `http://localhost:1337/products`
     );
     setProducts(res.data);
     setLoading(false);
@@ -157,7 +157,7 @@ const ProductItems = () => {
                 <div className={classes.productDiv}>
                   <img
                     alt="product1"
-                    src={`https://strapi-backend-organic.herokuapp.com${product.image.url}`}
+                    src={`http://localhost:1337${product.image.url}`}
                     style={{ width: "95%" }}
                   />
                 </div>

@@ -149,7 +149,7 @@ const Cart = () => {
                     <div className={classes.productDiv}>
                       <img
                         alt="product1"
-                        src={`https://strapi-backend-organic.herokuapp.com${
+                        src={`http://localhost:1337${
                           item && item.product.image.url
                         }`}
                         style={{ width: "95%" }}

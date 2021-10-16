@@ -12,7 +12,7 @@ const SignUp = ({ history }) => {
   });
   const handleSignIn = () => {
     axios
-      .post("https://strapi-backend-organic.herokuapp.com/auth/local/register", {
+      .post("http://localhost:1337/auth/local/register", {
         username: name,
         email:email,
         password: password,

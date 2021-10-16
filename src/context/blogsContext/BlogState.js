@@ -21,7 +21,7 @@ const BlogState = (props) => {
     // GET contacts
     const getBlogs = async () => {
         try {
-            const res = await axios.get(`https://strapi-backend-organic.herokuapp.com/blogs`);
+            const res = await axios.get(`http://localhost:1337/blogs`);
             dispatch({
                 type: GET_BLOGS,
                 payload: res.data
