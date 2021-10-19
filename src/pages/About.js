@@ -34,7 +34,7 @@ const About = () => {
     }))
     const classes = useStyles();
     return (
-        <div style={{ width: '90%', marginLeft: 'auto', marginRight: 'auto', marginTop: '10%' }}>
+        <div style={{ width: '95%', marginLeft: 'auto', marginRight: 'auto', marginTop: '10%' }}>
 
             <h3 className={classes.heading}>The Organic</h3>
             <p className={classes.paragraph}>

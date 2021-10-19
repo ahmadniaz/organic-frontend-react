@@ -9,6 +9,7 @@ const SignUp = ({ history }) => {
     name: "",
     email: "",
     password: "",
+    cnfrmPassword:""
   });
   const handleSignIn = () => {
     axios
@@ -16,6 +17,7 @@ const SignUp = ({ history }) => {
         username: name,
         email:email,
         password: password,
+        cnfrmPassword:cnfrmPassword
       })
       .then((response) => {
         // Handle success.
@@ -28,7 +30,7 @@ const SignUp = ({ history }) => {
         console.log("An error occurred:", error.response);
       });
   };
-  const { name, email, password } = formValue;
+  const { name, email, password,cnfrmPassword } = formValue;
   const onChange = (e) => {
     setFormValue({ ...formValue, [e.target.name]: e.target.value });
   };
@@ -132,6 +134,7 @@ const SignUp = ({ history }) => {
           name="name"
           value={name}
           placeholder="username"
+          required
         />
         <input
           className={classes.input}
@@ -140,6 +143,7 @@ const SignUp = ({ history }) => {
           value={email}
           onChange={onChange}
           placeholder="Email Address"
+          required
         />
         <input
           className={classes.input}
@@ -148,14 +152,18 @@ const SignUp = ({ history }) => {
           value={password}
           onChange={onChange}
           placeholder="Password"
+          minlength="8"
+          required
         />
         <input
           className={classes.input}
           type="password"
-          name="password"
-          value={password}
+          name="cnfrmPassword"
+          value={cnfrmPassword}
           onChange={onChange}
           placeholder="Confirm Password"
+          minlength="8"
+          required
         />
         <Button className={classes.button} onClick={handleSignIn}>
           {" "}

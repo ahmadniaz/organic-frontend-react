@@ -15,21 +15,6 @@ const EmptyCart = () => {
             fontSize: '30px',
             fontWeight: 'bold',
 
-        },
-        button: {
-            ...theme.typography.secondary,
-            color: theme.palette.secondary.light,
-            backgroundColor: theme.palette.secondary.main,
-            marginTop: 0,
-            borderRadius: '20px',
-            borderWidth: '3px ',
-            borderColor: theme.palette.secondary.main,
-            padding: '2px 25px 2px 25px',
-            "&:hover": {
-                backgroundColor: theme.palette.secondary.light,
-                color: theme.palette.secondary.main,
-                borderColor: theme.palette.secondary.main,
-            }
         }
 
     }))

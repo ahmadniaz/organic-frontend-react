@@ -5,11 +5,10 @@ import { makeStyles } from "@material-ui/styles";
 import { Link, NavLink } from "react-router-dom";
 import Button from "@restart/ui/esm/Button";
 
-
 const clientId =
   "24636475881-mkr9q94rl59gsqjlubaimme9efres0nb.apps.googleusercontent.com";
 
-  const Login = ({ history }) => {
+const Login = ({ history }) => {
   const [showloginButton, setShowloginButton] = useState(true);
   const [showlogoutButton, setShowlogoutButton] = useState(false);
 
@@ -17,41 +16,41 @@ const clientId =
     email: "",
     password: "",
   });
-    const [error, setError] = useState("");
-    const [user, setUser] = useState('');
-    const { email, password } = loginValue;
+  const [error, setError] = useState("");
+  const [user, setUser] = useState("");
+  const { email, password } = loginValue;
   const onChange = (e) => {
     setLoginValue({ ...loginValue, [e.target.name]: e.target.value });
   };
 
-    useEffect(() => {
-        if (user) {
-            history.push("/");
-        }
-        //eslint-disable-next-line
-    }, [user]);
-    const handleSubmit = async (e, timeout=3000) => {
-        e.preventDefault();
-        try {
-            const response = await fetch("http://localhost:1337/auth/local/", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ identifier: email, password }),
-            });
-            const data = await response.json();
-            console.log("data", data);
-            if (data.message) {
-                console.log('its, working')
-                setError("Wrong Email or Password");
-                return;
-            }
-            setUser(data);
-        } catch (err) {
-          setError("Something went wrong" + err);
-        }
-    };
+  useEffect(() => {
+    if (user) {
+      history.push("/");
+    }
+    //eslint-disable-next-line
+  }, [user]);
+  const handleSubmit = async (e, timeout = 3000) => {
+    e.preventDefault();
+    try {
+      const response = await fetch("http://localhost:1337/auth/local/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ identifier: email, password }),
+      });
+      const data = await response.json();
+      console.log("data", data);
+      if (data.message) {
+        console.log("its, working");
+        setError("Wrong Email or Password");
+        return;
+      }
+      setUser(data);
+    } catch (err) {
+      setError("Something went wrong" + err);
+    }
+  };
 
   const onLoginSuccess = (res) => {
     console.log("Login Success:", res.profileObj);
@@ -70,12 +69,12 @@ const clientId =
     setShowlogoutButton(false);
   };
 
-//   const responseFacebook = (response) => {
-//     console.log(response);
-//   };
-//   const componentClicked = () => {
-//     console.log("clicked");
-//   };
+  //   const responseFacebook = (response) => {
+  //     console.log(response);
+  //   };
+  //   const componentClicked = () => {
+  //     console.log("clicked");
+  //   };
   const useStyles = makeStyles((theme) => ({
     primaryDiv: {
       marginTop: "15%",
@@ -147,26 +146,25 @@ const clientId =
       marginTop: "3%",
     },
     tab: {
-        textDecoration: 'none'
-    }, 
-    error:{
-        border:'0px', 
-        textAlign:'center', 
-        color:theme.palette.primary.dark, 
-        margin: '0 auto'
-    }
+      textDecoration: "none",
+    },
+    error: {
+      border: "0px",
+      textAlign: "center",
+      color: theme.palette.primary.dark,
+      margin: "0 auto",
+    },
   }));
 
   const classes = useStyles();
 
   return (
-    
     <div className={classes.primaryDiv}>
       <div className={classes.mainDiv}>
         <input
           className={classes.input}
           type="email"
-          name='email'
+          name="email"
           value={email}
           onChange={onChange}
           placeholder="Email Address"
@@ -174,13 +172,17 @@ const clientId =
         <input
           className={classes.input}
           type="password"
-          name='password'
+          name="password"
           value={password}
           onChange={onChange}
           placeholder="Password"
+          required
         />
         {error && <p className={classes.error}>{error}</p>}
-        <Button className={classes.button} onClick={handleSubmit}> SIGN IN </Button>
+        <Button className={classes.button} onClick={handleSubmit}>
+          {" "}
+          SIGN IN{" "}
+        </Button>
         <div
           className={classes.divider}
           style={{ display: "flex", textAlign: "center" }}
@@ -196,13 +198,13 @@ const clientId =
           ></div>
         </div>
       </div>
-      <div style={{ textAlignLast: "center", marginTop:'3%' }}>
+      <div style={{ textAlignLast: "center", marginTop: "3%" }}>
         {showloginButton ? (
           <GoogleLogin
             clientId={clientId}
             onClick={() =>
-                (window.location = 'http://localhost:1337/connect/google')
-              }
+              (window.location = "http://localhost:1337/connect/google")
+            }
             buttonText="Continue With Google"
             onSuccess={onLoginSuccess}
             onFailure={onLoginFailure}
@@ -229,10 +231,9 @@ const clientId =
           icon="fa-facebook"
         /> */}
       </div>
-      <Link className={classes.tab} as={NavLink} to='/signup'>
-      <h3 className={classes.heading}>CAN'T SIGNIN?</h3>
+      <Link className={classes.tab} as={NavLink} to="/signup">
+        <h3 className={classes.heading}>CAN'T SIGNIN?</h3>
       </Link>
-      
     </div>
   );
 };

@@ -106,6 +106,9 @@ const Cart = () => {
       fontSize: "36px",
       fontWeight: "bold",
     },
+    tab:{
+      textDecoration:'none'
+    }
   }));
   const classes = useStyles();
   return (
@@ -113,7 +116,7 @@ const Cart = () => {
       {!loading && cartItems && cartItems.length === 0 && total === 0 ? (
         <EmptyCart />
       ) : (
-        <div>
+        <div style={{textAlign:'center'}}>
           <Grid container className={classes.mainDiv}>
             <Grid xs={1}></Grid>
             <Grid item xs={2}>
@@ -207,7 +210,7 @@ const Cart = () => {
               </Grid>
             ))}
           <Grid container className={classes.bottomDiv}>
-            <Grid item xs={6}>
+            <Grid item xs={6} style={{textAlign: 'initial'}}>
               <h3> Total Products</h3>
               <h3> Sub Total</h3>
               <h1 className={classes.title}> Total</h1>
@@ -220,13 +223,13 @@ const Cart = () => {
           </Grid>
           <Link className={classes.tab} as={NavLink} to="/checkout">
           <Button variant="contained" color='secondary' 
-          style={{textAlign:'center'}}
+          style={{textAlign:'center', marginTop:'5%', borderRadius:''}}
           >Checkout</Button>
           </Link>
         </div>
       )}
       <div style={{ width: "95%", marginLeft: "auto", marginRight: "auto", marginTop:'20%' }}>
-        <NewsLetter />
+        <NewsLetter/>
       </div>
     </>
   );

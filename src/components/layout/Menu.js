@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
   },
   bar: {
     backgroundImage: `url(${WaveTop})`,
-    backgroundSize: "130% 100%",
+    backgroundSize: "105% 102%",
     marginTop: 0,
     marginBottom: "70px",
   },

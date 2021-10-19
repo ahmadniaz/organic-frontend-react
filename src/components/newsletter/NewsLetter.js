@@ -31,7 +31,7 @@ const NewsLetter = () => {
     floatingDiv: {
       position: "relative",
       top: "-45%",
-      left:'5%'
+      left:'4%'
     },
     inputField: {
       borderRadius: "20px",
