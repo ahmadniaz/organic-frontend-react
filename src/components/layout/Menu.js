@@ -5,7 +5,6 @@ import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import { makeStyles } from "@material-ui/styles";
 import { theme } from "../Theme";
 import Badge from "@material-ui/core/Badge";
-// import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Grid from "@material-ui/core/Grid";
 import LogoCropped from "../../Assets/LogoCropped.png";
 import WaveTop from "../../Assets/WaveTop.png";
@@ -47,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
   },
   bar: {
     backgroundImage: `url(${WaveTop})`,
-    backgroundSize: "105% 102%",
+    backgroundSize: "112% 102%",
     marginTop: 0,
     marginBottom: "70px",
   },

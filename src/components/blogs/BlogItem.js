@@ -33,6 +33,7 @@ const BlogItem = () => {
             color: theme.palette.secondary.main,
             fontSize: '14px',
             marginBottom: 0,
+            width:"400px"
         },
         tab: {
             textDecoration: 'none'
@@ -64,8 +65,8 @@ const BlogItem = () => {
 
             <Grid container style={{ marginTop: '200px' }}>
                 <Grid item xs={12} className={classes.mainGrid} style={{ display: 'flex' }}>
-                    <Grid item xs={3} style={{ textAlign: 'center' }}>
-                        <img alt="NEWS 1" src={N1} style={{ width: '280px', height: '330px' }} />
+                    <Grid item xs={3} style={{textAlign: '-webkit-center'}}>
+                        <img alt="NEWS 1" src={N1} style={{ width: '430px', height: '330px' }} />
                         <Link className={classes.tab} as={NavLink} to='/blog'>
                             <p className={classes.firstPara}>Organic Drinks</p>
                         </Link>
@@ -75,7 +76,7 @@ const BlogItem = () => {
                             Molestias aut, repellat ipsum facere voluptate dicta obcaecati deserunt nobis suscipit eaque?
                         </p>
                     </Grid>
-                    <Grid item xs={5} style={{ textAlign: 'center' }}>
+                    <Grid item xs={5} style={{ textAlign: '-webkit-center' }}>
                         <img alt="NEWS 2" src={N2} style={{ width: '430px', height: '330px', marginLeft: '30px' }} />
                         <Link className={classes.tab} as={NavLink} to='/blog'>
                             <p className={classes.firstPara}>Summer Fruits</p>
@@ -86,8 +87,8 @@ const BlogItem = () => {
                             Molestias aut, repellat ipsum facere voluptate dicta obcaecati deserunt nobis suscipit eaque?
                         </p>
                     </Grid>
-                    <Grid item xs={4} style={{ textAlign: 'center' }}>
-                        <img alt="NEWS 3" src={N3} style={{ width: '270px', height: '330px' }} />
+                    <Grid item xs={4} style={{textAlign: '-webkit-center' }}>
+                        <img alt="NEWS 3" src={N3} style={{ width: '430px', height: '330px' }} />
                         <Link className={classes.tab} as={NavLink} to='/blog'>
                             <p className={classes.firstPara}>Organic BreakFast</p>
                         </Link>

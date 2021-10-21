@@ -59,7 +59,7 @@ const Footer = () => {
     return (
         <div className={classes.mainGrid} style={{ marginTop: '100px' }}>
 
-            <Grid container style={{width:'98%', marginLeft:'auto', marginRight:'auto'}}>
+            <Grid container style={{width:'90%', marginLeft:'auto', marginRight:'auto'}}>
                 <Grid item xs={3}>
                     <p className={classes.firstHeading}>The Organic</p>
                     <p className={classes.secondPara}>Lorem, ipsum dolor sit amet consectetur adipisicing elit.

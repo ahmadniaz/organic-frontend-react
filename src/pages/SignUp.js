@@ -1,56 +1,41 @@
-import React, { useState } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/styles";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useHistory } from "react-router-dom";
+import { Formik, Form } from "formik";
+import * as Yup from "yup";
+import { toast, Slide } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Button from "@restart/ui/esm/Button";
 import axios from "axios";
+import { MyInputField } from "../components/form/MyInputField";
 
-const SignUp = ({ history }) => {
-  const [formValue, setFormValue] = useState({
-    name: "",
-    email: "",
-    password: "",
-    cnfrmPassword:""
-  });
-  const handleSignIn = () => {
-    axios
-      .post("http://localhost:1337/auth/local/register", {
-        username: name,
-        email:email,
-        password: password,
-        cnfrmPassword:cnfrmPassword
-      })
-      .then((response) => {
-        // Handle success.
-        console.log("Well done!");
-        history.push("/login");
-        console.log("User token", response.data.jwt);
-      })
-      .catch((error) => {
-        // Handle error.
-        console.log("An error occurred:", error.response);
-      });
+const SignUp = () => {
+  const history = useHistory();
+  const showError = (message) => {
+    toast.error(message, {
+      position: "bottom-center",
+      autoClose: 3000,
+      hideProgressBar: true,
+      closeOnClick: false,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      transition: Slide,
+      theme: "colored",
+      pauseOnFocusLoss: false,
+    });
   };
-  const { name, email, password,cnfrmPassword } = formValue;
-  const onChange = (e) => {
-    setFormValue({ ...formValue, [e.target.name]: e.target.value });
-  };
-
-  console.log(formValue, 'this is form value')
-  console.log(name, 'helo')
-  console.log(formValue.password, 'password')
-  
-
   const useStyles = makeStyles((theme) => ({
     primaryDiv: {
       marginTop: "18%",
     },
     mainDiv: {
-      height: "200px",
+      height: "auto",
       width: "500px",
       position: "relative",
       top: "50%",
       left: "50%",
-      transform: "translate(-50%, -75%)",
+      transform: "translate(-50%, -30%)",
       backgroundColor: "rgba(255, 255,255, 0.5)",
     },
     input: {
@@ -58,7 +43,8 @@ const SignUp = ({ history }) => {
       fontSize: "20px",
       marginLeft: "10%",
       borderBottom: "1px solid #adb5bd",
-      padding: "3% 30% 3% 0",
+      width: "75%",
+      padding: "2%",
       backgroundColor: "white",
       display: "block",
       "&::placeholder": {
@@ -127,48 +113,82 @@ const SignUp = ({ history }) => {
   return (
     <div className={classes.primaryDiv}>
       <div className={classes.mainDiv}>
-        <input
-          className={classes.input}
-          onChange={onChange}
-          type="text"
-          name="name"
-          value={name}
-          placeholder="username"
-          required
-        />
-        <input
-          className={classes.input}
-          type="email"
-          name="email"
-          value={email}
-          onChange={onChange}
-          placeholder="Email Address"
-          required
-        />
-        <input
-          className={classes.input}
-          type="password"
-          name="password"
-          value={password}
-          onChange={onChange}
-          placeholder="Password"
-          minlength="8"
-          required
-        />
-        <input
-          className={classes.input}
-          type="password"
-          name="cnfrmPassword"
-          value={cnfrmPassword}
-          onChange={onChange}
-          placeholder="Confirm Password"
-          minlength="8"
-          required
-        />
-        <Button className={classes.button} onClick={handleSignIn}>
-          {" "}
-          SIGN UP{" "}
-        </Button>
+        <Formik
+          initialValues={{
+            username: "",
+            email: "",
+            password: "",
+            cnfrmPassword: "",
+          }}
+          validationSchema={Yup.object({
+            username: Yup.string().required("Username is required!"),
+            email: Yup.string()
+              .required("Email is required!")
+              .email("Please enter a valid email!"),
+            password: Yup.string()
+              .required("Password is required!")
+              .matches(
+                /^(?=.*[A-Z])/,
+                "Password must contain one uppercase letter!"
+              )
+              .matches(/^(?=.*[0-9])/, "Password must contain a digit!")
+              .matches(/^(?=.{8,})/, "Password must be 8 letters or more!"),
+            confirmPassword: Yup.string()
+              .oneOf([Yup.ref("password"), null], "Password does not match!")
+              .required("Confirm Password is required!"),
+          })}
+          onSubmit={async (values, { setSubmitting }) => {
+            console.log(values)
+            try {
+              await axios.post("http://localhost:1337/auth/local/register", values);
+              history.push("/");
+            } catch (error) {
+              if (error.code === "auth/network-request-failed")
+                showError("Check your internet connection!");
+              else showError("Email already is use!");
+            } finally {
+              setSubmitting(false);
+            }
+          }}
+        >
+          {({ isSubmitting, isValid, dirty }) => (
+            <Form className="ui form">
+              <MyInputField
+                className={classes.input}
+                name="username"
+                placeholder="Enter your username"
+              />
+              <MyInputField
+                className={classes.input}
+                name="email"
+                placeholder="Enter your email"
+              />
+              <MyInputField
+                className={classes.input}
+                name="password"
+                placeholder="Enter your password"
+                type="password"
+              />
+              <MyInputField
+                className={classes.input}
+                name="confirmPassword"
+                placeholder="Confirm your password"
+                type="password"
+              />
+              <Button
+                type="submit"
+                loading={isSubmitting}
+                disabled={!isValid || !dirty || isSubmitting}
+                size="large"
+                className={classes.button}
+                content="Sign Up"
+              >
+                {" "}
+                SIGN IN{" "}
+              </Button>
+            </Form>
+          )}
+        </Formik>
         <p className={classes.para}>
           By creating an account, you agree to our
           <Link className={classes.tab} as={NavLink} to="/termsofservices">

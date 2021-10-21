@@ -3,7 +3,13 @@ import { GoogleLogin, GoogleLogout } from "react-google-login";
 // import FacebookLogin from "react-facebook-login";
 import { makeStyles } from "@material-ui/styles";
 import { Link, NavLink } from "react-router-dom";
+import { Formik, Form } from "formik";
+import * as Yup from "yup";
+import { toast, Slide, Bounce } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Button from "@restart/ui/esm/Button";
+import axios from "axios";
+import { MyInputField } from "../components/form/MyInputField";
 
 const clientId =
   "24636475881-mkr9q94rl59gsqjlubaimme9efres0nb.apps.googleusercontent.com";
@@ -12,62 +18,59 @@ const Login = ({ history }) => {
   const [showloginButton, setShowloginButton] = useState(true);
   const [showlogoutButton, setShowlogoutButton] = useState(false);
 
-  const [loginValue, setLoginValue] = useState({
-    email: "",
-    password: "",
-  });
+  // const [loginValue, setLoginValue] = useState({
+  //   email: "",
+  //   password: "",
+  // });
   const [error, setError] = useState("");
   const [user, setUser] = useState("");
-  const { email, password } = loginValue;
-  const onChange = (e) => {
-    setLoginValue({ ...loginValue, [e.target.name]: e.target.value });
+  // const { email, password } = loginValue;
+  // const onChange = (e) => {
+  //   setLoginValue({ ...loginValue, [e.target.name]: e.target.value });
+  // };
+  const showError = (message) => {
+    toast.error(message, {
+      position: "bottom-center",
+      autoClose: 3000,
+      hideProgressBar: true,
+      closeOnClick: false,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      transition: Bounce,
+      theme: "colored",
+      pauseOnFocusLoss: false,
+      type:'error'
+    });
   };
-
   useEffect(() => {
     if (user) {
       history.push("/");
     }
     //eslint-disable-next-line
   }, [user]);
-  const handleSubmit = async (e, timeout = 3000) => {
-    e.preventDefault();
-    try {
-      const response = await fetch("http://localhost:1337/auth/local/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ identifier: email, password }),
-      });
-      const data = await response.json();
-      console.log("data", data);
-      if (data.message) {
-        console.log("its, working");
-        setError("Wrong Email or Password");
-        return;
-      }
-      setUser(data);
-    } catch (err) {
-      setError("Something went wrong" + err);
-    }
-  };
 
-  const onLoginSuccess = (res) => {
-    console.log("Login Success:", res.profileObj);
-    setShowloginButton(false);
-    setShowlogoutButton(true);
-  };
+  // const handleSubmit = async (e, timeout = 3000) => {
+  //   e.preventDefault();
 
-  const onLoginFailure = (res) => {
-    console.log("Login Failed:", res);
-  };
+  // };
 
-  const onSignoutSuccess = () => {
-    alert("You have been logged out successfully");
-    console.clear();
-    setShowloginButton(true);
-    setShowlogoutButton(false);
-  };
+  // const onLoginSuccess = (res) => {
+  //   console.log("Login Success:", res.profileObj);
+  //   setShowloginButton(false);
+  //   setShowlogoutButton(true);
+  // };
+
+  // const onLoginFailure = (res) => {
+  //   console.log("Login Failed:", res);
+  // };
+
+  // const onSignoutSuccess = () => {
+  //   alert("You have been logged out successfully");
+  //   console.clear();
+  //   setShowloginButton(true);
+  //   setShowlogoutButton(false);
+  // };
 
   //   const responseFacebook = (response) => {
   //     console.log(response);
@@ -93,7 +96,8 @@ const Login = ({ history }) => {
       fontSize: "20px",
       marginLeft: "10%",
       borderBottom: "1px solid #adb5bd",
-      padding: "3% 30% 3% 0",
+      width: "80%",
+      padding: "2%",
       backgroundColor: "white",
       display: "block",
       "&::placeholder": {
@@ -161,28 +165,78 @@ const Login = ({ history }) => {
   return (
     <div className={classes.primaryDiv}>
       <div className={classes.mainDiv}>
-        <input
-          className={classes.input}
-          type="email"
-          name="email"
-          value={email}
-          onChange={onChange}
-          placeholder="Email Address"
-        />
-        <input
-          className={classes.input}
-          type="password"
-          name="password"
-          value={password}
-          onChange={onChange}
-          placeholder="Password"
-          required
-        />
+        <Formik
+          initialValues={{
+            email: "",
+            password: "",
+          }}
+          validationSchema={Yup.object({
+            email: Yup.string()
+              .required("Email is required!")
+              .email("Please enter a valid email!"),
+            password: Yup.string()
+              .required("Password is required!")
+              .matches(/^(?=.{8,})/, "Passwords are usually 8 character long!"),
+          })}
+          onSubmit={async (values, { setSubmitting }) => {
+            console.log(values);
+            const {email, password} = values;
+            try {
+              const response = await fetch("http://localhost:1337/auth/local/", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ identifier: email, password}),
+              });
+              const data = await response.json();
+              console.log("data", data);
+              if (data.message) {
+                console.log("its, working");
+                showError("Wrong Email or Password");
+                return;
+              }
+              setUser(data);
+            } catch (err) {
+              showError("Something went wrong" + err);
+            } finally {
+              setSubmitting(false);
+            }
+          }}
+        >
+          {({ isSubmitting, isValid, dirty }) => (
+            <Form className="ui form">
+              <MyInputField
+                className={classes.input}
+                name="email"
+                placeholder="Enter your email"
+              />
+              <MyInputField
+                className={classes.input}
+                name="password"
+                placeholder="Enter your password"
+                type="password"
+              />
+              <Button
+                type="submit"
+                loading={isSubmitting}
+                disabled={!isValid || !dirty || isSubmitting}
+                size="large"
+                className={classes.button}
+                content="Sign Up"
+              >
+                {" "}
+                SIGN IN{" "}
+              </Button>
+            </Form>
+          )}
+        </Formik>
+
         {error && <p className={classes.error}>{error}</p>}
-        <Button className={classes.button} onClick={handleSubmit}>
+        {/* <Button className={classes.button} onClick={handleSubmit}>
           {" "}
           SIGN IN{" "}
-        </Button>
+        </Button> */}
         <div
           className={classes.divider}
           style={{ display: "flex", textAlign: "center" }}
@@ -198,7 +252,7 @@ const Login = ({ history }) => {
           ></div>
         </div>
       </div>
-      <div style={{ textAlignLast: "center", marginTop: "3%" }}>
+      {/* <div style={{ textAlignLast: "center", marginTop: "3%" }}>
         {showloginButton ? (
           <GoogleLogin
             clientId={clientId}
@@ -219,7 +273,7 @@ const Login = ({ history }) => {
             buttonText="Sign Out"
             onLogoutSuccess={onSignoutSuccess}
           ></GoogleLogout>
-        ) : null}
+        ) : null} */}
 
         {/* <FacebookLogin
           appId="239817504782304"
@@ -230,7 +284,7 @@ const Login = ({ history }) => {
           cssClass="my-facebook-button-class"
           icon="fa-facebook"
         /> */}
-      </div>
+      {/* </div> */}
       <Link className={classes.tab} as={NavLink} to="/signup">
         <h3 className={classes.heading}>CAN'T SIGNIN?</h3>
       </Link>

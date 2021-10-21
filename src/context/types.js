@@ -23,6 +23,5 @@ export const GET_BLOGS = 'GET_BLOGS';
 export const BLOG_CLICK = 'BLOG_CLICK';
 
 //Auth types
-export const USER_LOGIN='USER_LOGIN';
 export const LOGIN_SUCCESS= 'LOGIN_SUCCESS';
 export const LOGIN_ERROR='LOGIN_ERROR';
