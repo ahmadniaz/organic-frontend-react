@@ -1,26 +1,16 @@
-import {
-    LOGIN_SUCCESS, 
-    LOGIN_ERROR
-} from '../types';
+import { LOGIN_SUCCESS } from "../types";
 
+const userReducer = (state, action) => {
+  switch (action.type) {
+    case LOGIN_SUCCESS:
+        console.log(action.payload, "user reducer")
+      return {
+        ...state,
+        user: action.payload,
+      };
+    default:
+      return state;
+  }
+};
 
-const blogReducer = (state, action) => {
-    switch (action.type) {
-
-        case LOGIN_SUCCESS:
-            return {
-                ...state,
-                blogs: action.payload,
-            }
-        case LOGIN_ERROR:
-            return {
-                ...state,
-                currentBlog: action.payload
-            }
-
-        default:
-            return state;
-    };
-}
-
-export default blogReducer;
+export default userReducer;

@@ -1,59 +1,31 @@
-import React, { useState, useEffect } from "react";
-import { GoogleLogin, GoogleLogout } from "react-google-login";
+import React, { useState, useEffect, useContext } from "react";
+// import { GoogleLogin, GoogleLogout } from "react-google-login";
 // import FacebookLogin from "react-facebook-login";
 import { makeStyles } from "@material-ui/styles";
 import { Link, NavLink } from "react-router-dom";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import { toast, Slide, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Button from "@restart/ui/esm/Button";
-import axios from "axios";
 import { MyInputField } from "../components/form/MyInputField";
+import UserContext from "../context/usercontext/userContext";
 
-const clientId =
-  "24636475881-mkr9q94rl59gsqjlubaimme9efres0nb.apps.googleusercontent.com";
+// const clientId =
+//   "24636475881-mkr9q94rl59gsqjlubaimme9efres0nb.apps.googleusercontent.com";
 
 const Login = ({ history }) => {
-  const [showloginButton, setShowloginButton] = useState(true);
-  const [showlogoutButton, setShowlogoutButton] = useState(false);
+  // const [showloginButton, setShowloginButton] = useState(true);
+  // const [showlogoutButton, setShowlogoutButton] = useState(false);
 
-  // const [loginValue, setLoginValue] = useState({
-  //   email: "",
-  //   password: "",
-  // });
-  const [error, setError] = useState("");
-  const [user, setUser] = useState("");
-  // const { email, password } = loginValue;
-  // const onChange = (e) => {
-  //   setLoginValue({ ...loginValue, [e.target.name]: e.target.value });
-  // };
-  const showError = (message) => {
-    toast.error(message, {
-      position: "bottom-center",
-      autoClose: 3000,
-      hideProgressBar: true,
-      closeOnClick: false,
-      pauseOnHover: false,
-      draggable: false,
-      progress: undefined,
-      transition: Bounce,
-      theme: "colored",
-      pauseOnFocusLoss: false,
-      type:'error'
-    });
-  };
+  const userContext = useContext(UserContext);
+  const { user, handleSubmit } = userContext;
+
   useEffect(() => {
     if (user) {
       history.push("/");
     }
     //eslint-disable-next-line
   }, [user]);
-
-  // const handleSubmit = async (e, timeout = 3000) => {
-  //   e.preventDefault();
-
-  // };
 
   // const onLoginSuccess = (res) => {
   //   console.log("Login Success:", res.profileObj);
@@ -179,29 +151,8 @@ const Login = ({ history }) => {
               .matches(/^(?=.{8,})/, "Passwords are usually 8 character long!"),
           })}
           onSubmit={async (values, { setSubmitting }) => {
-            console.log(values);
-            const {email, password} = values;
-            try {
-              const response = await fetch("http://localhost:1337/auth/local/", {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ identifier: email, password}),
-              });
-              const data = await response.json();
-              console.log("data", data);
-              if (data.message) {
-                console.log("its, working");
-                showError("Wrong Email or Password");
-                return;
-              }
-              setUser(data);
-            } catch (err) {
-              showError("Something went wrong" + err);
-            } finally {
-              setSubmitting(false);
-            }
+            await handleSubmit(values);
+            setSubmitting(false);
           }}
         >
           {({ isSubmitting, isValid, dirty }) => (
@@ -231,12 +182,6 @@ const Login = ({ history }) => {
             </Form>
           )}
         </Formik>
-
-        {error && <p className={classes.error}>{error}</p>}
-        {/* <Button className={classes.button} onClick={handleSubmit}>
-          {" "}
-          SIGN IN{" "}
-        </Button> */}
         <div
           className={classes.divider}
           style={{ display: "flex", textAlign: "center" }}
@@ -252,8 +197,8 @@ const Login = ({ history }) => {
           ></div>
         </div>
       </div>
-      {/* <div style={{ textAlignLast: "center", marginTop: "3%" }}>
-        {showloginButton ? (
+      <div style={{ textAlignLast: "center", marginTop: "3%" }}>
+        {/* {showloginButton ? (
           <GoogleLogin
             clientId={clientId}
             onClick={() =>
@@ -284,7 +229,7 @@ const Login = ({ history }) => {
           cssClass="my-facebook-button-class"
           icon="fa-facebook"
         /> */}
-      {/* </div> */}
+      </div>
       <Link className={classes.tab} as={NavLink} to="/signup">
         <h3 className={classes.heading}>CAN'T SIGNIN?</h3>
       </Link>

@@ -43,7 +43,6 @@ const ProductState = (props) => {
     const getProducts = async () => {
         try {
             const res = await axios.get(`http://localhost:1337/products`)
-            console.log(res.data, 'in state products')
             dispatch({
                 type: GET_PRODUCTS,
                 payload: res.data

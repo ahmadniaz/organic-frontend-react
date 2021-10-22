@@ -25,7 +25,6 @@ const productReducer = (state, action) => {
     switch (action.type) {
 
         case GET_PRODUCTS:
-            console.log(action.payload, 'in reducer products')
             return {
                 ...state,
                 products: action.payload

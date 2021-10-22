@@ -79,7 +79,7 @@ const Footer = () => {
                     <Link className={classes.tab} as={NavLink} to='/'> Home </Link>
                     <Link className={classes.tab} as={NavLink} to='/about'> About </Link>
                     <Link className={classes.tab} as={NavLink} to='/store'> Store </Link>
-                    <Link className={classes.tab} as={NavLink} to='/signin'> Sign In </Link>
+                    <Link className={classes.tab} as={NavLink} to='/login'> Login</Link>
                     <Link className={classes.tab} as={NavLink} to='/signup'> Sign Up</Link>
                     <Link className={classes.tab} as={NavLink} to='/contact'> Contact </Link>
 

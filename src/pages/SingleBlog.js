@@ -22,7 +22,6 @@ const SingleBlog = () => {
     //eslint-disable-next-line
   }, []);
   const data = curBlog.detailedDescription.split("\n");
-  console.log(curBlog.detailedDescription);
 
   const useStyles = makeStyles((theme) => ({
     paragraph: {

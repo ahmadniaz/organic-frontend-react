@@ -138,7 +138,6 @@ const SignUp = () => {
               .required("Confirm Password is required!"),
           })}
           onSubmit={async (values, { setSubmitting }) => {
-            console.log(values)
             try {
               await axios.post("http://localhost:1337/auth/local/register", values);
               history.push("/");
