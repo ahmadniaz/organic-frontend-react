@@ -18,10 +18,14 @@ const Login = ({ history }) => {
   // const [showlogoutButton, setShowlogoutButton] = useState(false);
 
   const userContext = useContext(UserContext);
+  console.log(userContext, "in the login page context");
   const { user, handleSubmit } = userContext;
+  console.log(user, "hello user");
 
   useEffect(() => {
     if (user) {
+      console.log(user, "User login");
+      localStorage.getItem("user", JSON.stringify(user));
       history.push("/");
     }
     //eslint-disable-next-line

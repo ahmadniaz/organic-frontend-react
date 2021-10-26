@@ -15,6 +15,15 @@ import { NavLink, Link } from "react-router-dom";
 import Breadcrumb from "../breadcrumb/Breadcrumb";
 import ProductContext from "../../context/productContext/productContext";
 import Cart from "../../Assets/Cart.png";
+import MenuItem from "@mui/material/MenuItem";
+import UserContext from "../../context/usercontext/userContext";
+import Tooltip from "@mui/material/Tooltip";
+import SettingsIcon from "@mui/icons-material/Settings";
+import LogoutIcon from "@mui/icons-material/Logout";
+import Box from "@mui/material/Box";
+import Divider from "@mui/material/Divider";
+import Avatar from "@mui/material/Avatar";
+import ListItemIcon from "@mui/material/ListItemIcon";
 
 function ElevationScroll(props) {
   const { children } = props;
@@ -79,9 +88,21 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Menu(props) {
   const productContext = useContext(ProductContext);
+  const userContext = useContext(UserContext);
+  const { user } = userContext;
+  console.log(user, "in the Menu User");
   const { cartItems } = productContext;
   const [upperCase, setUpperCase] = useState("");
   const [open, setOpen] = useState(false);
+  // const [anchorEl, setAnchorEl] = useState(null);
+
+  // const handleClick = (event) => {
+  //   setAnchorEl(event.currentTarget);
+  // };
+
+  // const handleClose = () => {
+  //   setAnchorEl(null);
+  // };
   const getPageName = () => {
     const path = window.location.pathname;
     const page = path.split("/").pop();
@@ -95,77 +116,79 @@ export default function Menu(props) {
 
   const classes = useStyles();
   return (
-    <Grid container>
-      <ElevationScroll>
-        <AppBar position="fixed" className={classes.bar}>
-          <Toolbar disableGutters>
-            <div className={classes.logo}>
-              <img
-                alt="company logo"
-                style={{ marginTop: "20px" }}
-                src={LogoCropped}
-              />
-            </div>
-            <div className={classes.link}>
-              <Link className={classes.tab} as={NavLink} to="/">
-                {" "}
-                Home{" "}
-              </Link>
-              <Link className={classes.tab} as={NavLink} to="/about">
-                {" "}
-                About{" "}
-              </Link>
-              <Link className={classes.tab} as={NavLink} to="/store">
-                {" "}
-                Store{" "}
-              </Link>
-              <Link className={classes.tab} as={NavLink} to="/contact">
-                {" "}
-                Contact{" "}
-              </Link>
-            </div>
-            <Link className={classes.tab} as={NavLink} to="/login">
-              Login
-            </Link>
-            {open ? (
-              <div>
+    <>
+      <Grid container>
+        <ElevationScroll>
+          <AppBar position="fixed" className={classes.bar}>
+            <Toolbar disableGutters>
+              <div className={classes.logo}>
+                <img
+                  alt="company logo"
+                  style={{ marginTop: "20px" }}
+                  src={LogoCropped}
+                />
+              </div>
+              <div className={classes.link}>
+                <Link className={classes.tab} as={NavLink} to="/">
+                  {" "}
+                  Home{" "}
+                </Link>
+                <Link className={classes.tab} as={NavLink} to="/about">
+                  {" "}
+                  About{" "}
+                </Link>
+                <Link className={classes.tab} as={NavLink} to="/store">
+                  {" "}
+                  Store{" "}
+                </Link>
+                <Link className={classes.tab} as={NavLink} to="/contact">
+                  {" "}
+                  Contact{" "}
+                </Link>
+              </div>
+              {open ? (
+                <div>
+                  <img
+                    alt="Search Icon"
+                    src={SearchIcon}
+                    className={classes.cart}
+                    onClick={() => setOpen(!open)}
+                  />
+                  <input
+                    style={{
+                      borderRadius: "15px",
+                      borderColor: theme.palette.secondary.main,
+                      boderSize: "0px",
+                    }}
+                    type="text"
+                    placeholder="search...."
+                  />
+                </div>
+              ) : (
                 <img
                   alt="Search Icon"
                   src={SearchIcon}
                   className={classes.cart}
                   onClick={() => setOpen(!open)}
                 />
-                <input
-                  style={{
-                    borderRadius: "15px",
-                    borderColor: theme.palette.secondary.main,
-                    boderSize: "0px",
-                  }}
-                  type="text"
-                  placeholder="search...."
-                />
-              </div>
-            ) : (
-              <img
-                alt="Search Icon"
-                src={SearchIcon}
-                className={classes.cart}
-                onClick={() => setOpen(!open)}
-              />
-            )}
-            <Link className={classes.tab} as={NavLink} to="/cart">
-              <IconButton aria-label="cart" style={{ marginRight: "2%" }}>
-                <StyledBadge badgeContent={cartItems.length} color="secondary">
-                  <img alt="Cart Icon" src={Cart} />
-                </StyledBadge>
-              </IconButton>
-            </Link>
-          </Toolbar>
-          <h1 className={classes.pageName}>{upperCase}</h1>
-          <Breadcrumb />
-        </AppBar>
-      </ElevationScroll>
-      <div className={classes.toolbarMargin} />
-    </Grid>
+              )}
+              <Link className={classes.tab} as={NavLink} to="/cart">
+                <IconButton aria-label="cart" style={{ marginRight: "2%" }}>
+                  <StyledBadge
+                    badgeContent={cartItems.length}
+                    color="secondary"
+                  >
+                    <img alt="Cart Icon" src={Cart} />
+                  </StyledBadge>
+                </IconButton>
+              </Link>
+            </Toolbar>
+            <h1 className={classes.pageName}>{upperCase}</h1>
+            <Breadcrumb />
+          </AppBar>
+        </ElevationScroll>
+        <div className={classes.toolbarMargin} />
+      </Grid>
+    </>
   );
 }

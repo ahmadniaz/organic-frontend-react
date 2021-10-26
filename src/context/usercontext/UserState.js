@@ -34,7 +34,9 @@ const UserState = (props) => {
       const response = await axios.post("http://localhost:1337/auth/local/", {
         identifier: email,
         password,
+        withCredentials: true,
       });
+      console.log(response, "response is working");
       const data = response;
       if (data.message) {
         showError("Wrong Email or Password");
@@ -45,7 +47,7 @@ const UserState = (props) => {
         payload: response.data,
       });
     } catch (err) {
-      showError("Wrong Email OR Password" );
+      showError("Wrong Email OR Password");
     }
   };
 

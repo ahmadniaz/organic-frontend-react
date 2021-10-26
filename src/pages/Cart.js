@@ -7,7 +7,6 @@ import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 import EmptyCart from "../components/emptycart/emptyCart";
 import NewsLetter from "../components/newsletter/NewsLetter";
-// import CheckoutForm from "../components/stripe/CheckoutForm";
 
 import { Button } from '@material-ui/core';
 import { Link, NavLink } from "react-router-dom";
@@ -231,6 +230,7 @@ const Cart = () => {
       <div style={{ width: "95%", marginLeft: "auto", marginRight: "auto", marginTop:'20%' }}>
         <NewsLetter/>
       </div>
+
     </>
   );
 };

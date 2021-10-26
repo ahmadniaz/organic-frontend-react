@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import { makeStyles } from "@material-ui/styles";
 import Button from "@restart/ui/esm/Button";
-import { Link, NavLink } from "react-router-dom";
 
 const Contact = () => {
 

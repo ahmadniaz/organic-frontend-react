@@ -64,7 +64,9 @@ export default function Menu(props) {
   const [upperCase, setUpperCase] = useState("");
   const getPageName = () => {
     const path = window.location.pathname;
+    console.log(path, "path");
     const page = path.split("/").pop();
+    console.log(page, "page");
     setUpperCase(page.toUpperCase());
   };
 
