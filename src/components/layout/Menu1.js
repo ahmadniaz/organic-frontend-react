@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
@@ -62,18 +63,21 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Menu(props) {
   const [upperCase, setUpperCase] = useState("");
-  const getPageName = () => {
-    const path = window.location.pathname;
-    console.log(path, "path");
-    const page = path.split("/").pop();
-    console.log(page, "page");
-    setUpperCase(page.toUpperCase());
-  };
+  // const getPageName = () => {
+  //   const path = window.location.pathname;
+  //   console.log(path, "path");
+  //   const page = path.split("/").pop();
+  //   console.log(page, "page");
+  //   setUpperCase(page.toUpperCase());
+  // };
 
+  const location = useLocation();
+  const path = location.pathname;
   useEffect(() => {
-    getPageName();
+    const page = path.split("/").pop();
+    setUpperCase(page.toUpperCase());
     //eslint-disable-next-line
-  }, []);
+  }, [path]);
 
   const classes = useStyles();
   return (
@@ -98,6 +102,9 @@ export default function Menu(props) {
             </div>
             <div className={classes.link}>
               <h1 className={classes.pageName}>{upperCase}</h1>
+            </div>
+            <div>
+              <h1 className={classes.tab}>LOGIN</h1>
             </div>
           </Toolbar>
         </AppBar>

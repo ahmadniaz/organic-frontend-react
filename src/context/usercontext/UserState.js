@@ -4,7 +4,7 @@ import UserContext from "./userContext";
 import userReducer from "./userReducer";
 import { toast, Bounce } from "react-toastify";
 
-import { LOGIN_SUCCESS } from "../types";
+import { LOGIN_SUCCESS, LOGOUT_SUCCESS } from "../types";
 
 const UserState = (props) => {
   const initialState = {
@@ -30,6 +30,7 @@ const UserState = (props) => {
   // GET contacts
   const handleSubmit = async (values) => {
     const { email, password } = values;
+
     try {
       const response = await axios.post("http://localhost:1337/auth/local/", {
         identifier: email,
@@ -37,18 +38,21 @@ const UserState = (props) => {
         withCredentials: true,
       });
       console.log(response, "response is working");
-      const data = response;
-      if (data.message) {
-        showError("Wrong Email or Password");
-        return;
-      }
+      localStorage.setItem("user", JSON.stringify(response.data));
       dispatch({
         type: LOGIN_SUCCESS,
         payload: response.data,
       });
     } catch (err) {
-      showError("Wrong Email OR Password");
+      showError("Wrong Email Or Password");
     }
+  };
+
+  const handleLogout = () => {
+    dispatch({
+      type: LOGOUT_SUCCESS,
+    });
+    localStorage.removeItem("user");
   };
 
   return (
@@ -56,6 +60,7 @@ const UserState = (props) => {
       value={{
         user: state.user,
         handleSubmit,
+        handleLogout,
       }}
     >
       {props.children}

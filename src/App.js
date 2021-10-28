@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { ThemeProvider } from "@material-ui/core/styles";
 import { theme } from "./components/Theme";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Menu from "./components/layout/Menu";
+import MainMenu from "./components/layout/Menu";
 import Menu1 from "./components/layout/Menu1";
 import Store from "./pages/Store";
 import ProductDescription from "./pages/ProductDescription";
@@ -25,80 +25,80 @@ import Checkout from "./pages/Checkout";
 import ProductState from "./context/productContext/ProductState";
 import BlogState from "./context/blogsContext/BlogState";
 import { ToastContainer } from "react-toastify";
-import UserContext from "./context/usercontext/userContext";
 import Error from "./pages/Error";
+import { StyledEngineProvider } from "@mui/material/styles";
+import UserContext from "./context/usercontext/userContext";
 
 const App = () => {
   const userContext = useContext(UserContext);
-  console.log(userContext, "context");
   const { user } = userContext;
-  const [localUser, setLocalUser] = useState(user);
-  console.log(user, "user in APP");
+  console.log(user, " In App user , User");
+  const [localUser, setLocalUser] = useState("");
 
   useEffect(() => {
-    const localUsers = JSON.parse(localStorage.getItem("user")) || [];
-    setLocalUser(localUsers);
-    console.log(localUser, "in the app local user");
+    const token = localStorage.getItem("user");
+    const tokenData = JSON.parse(token);
+    setLocalUser(tokenData);
+    console.log(localUser, "user in APP");
     //eslint-disable-next-line
   }, []);
 
   return (
     <>
-      <ProductState>
-        <BlogState>
-          <ThemeProvider theme={theme}>
-            <BrowserRouter>
-              {user ? <Menu /> : <Menu1 />}
-              <Switch>
-                <Route exact path="/" component={Home} />
-                <Route exact path="/about" component={About} />
-                <Route exact path="/store" component={Store} />
-                <Route
-                  exact
-                  path="/productdescription"
-                  component={ProductDescription}
-                />
-                <Route exact path="/contact" component={Contact} />
-                <Route exact path="/blog" component={Blog} />
-                <Route exact path="/post" component={SingleBlog} />
-                <Route
-                  exact
-                  path="/cart"
-                  component={() => (user ? <Cart /> : <Redirect to="/" />)}
-                />
-                <Route
-                  exact
-                  path="/termsofservices"
-                  component={TermsOfServices}
-                />
-                <Route exact path="/privacypolicy" component={PrivacyPolicy} />
-                <Route exact path="/faq's" component={FAQs} />
-                <Route
-                  exact
-                  path="/checkout"
-                  component={() =>
-                    user ? <Checkout /> : <Redirect to="/signup" />
-                  }
-                />
-                <Route
-                  exact
-                  path="/login"
-                  component={() => (user ? <Redirect to="/" /> : <Login />)}
-                />
-                <Route
-                  exact
-                  path="/signup"
-                  component={() => (user ? <Redirect to="/" /> : <SignUp />)}
-                />
-                <Route component={Error} />
-              </Switch>
-              <ScrollToTop />
-              <Footer />
-            </BrowserRouter>
-          </ThemeProvider>
-        </BlogState>
-      </ProductState>
-      <ToastContainer />
+      <StyledEngineProvider>
+        <ProductState>
+          <BlogState>
+            <ThemeProvider theme={theme}>
+              <BrowserRouter>
+                {localUser || user ? <MainMenu /> : <Menu1 />}
+                <Switch>
+                  <Route exact path="/" component={Home} />
+                  <Route path="/about" component={About} />
+                  <Route path="/store" component={Store} />
+                  <Route
+                    path="/productdescription"
+                    component={ProductDescription}
+                  />
+                  <Route path="/contact" component={Contact} />
+                  <Route path="/blog" component={Blog} />
+                  <Route path="/post" component={SingleBlog} />
+                  <Route
+                    path="/cart"
+                    component={() =>
+                      localUser || user ? <Cart /> : <Redirect to="/login" />
+                    }
+                  />
+                  <Route path="/termsofservices" component={TermsOfServices} />
+                  <Route path="/privacypolicy" component={PrivacyPolicy} />
+                  <Route path="/faq's" component={FAQs} />
+                  <Route
+                    path="/checkout"
+                    component={() =>
+                      localUser ? <Checkout /> : <Redirect to="/login" />
+                    }
+                  />
+                  <Route
+                    path="/login"
+                    component={() =>
+                      localUser || user ? <Redirect to="/" /> : <Login />
+                    }
+                  />
+                  <Route
+                    path="/signup"
+                    component={() =>
+                      localUser ? <Redirect to="/" /> : <SignUp />
+                    }
+                  />
+                  <Route component={Error} />
+                </Switch>
+                <ScrollToTop />
+                <Footer />
+              </BrowserRouter>
+            </ThemeProvider>
+          </BlogState>
+        </ProductState>
+        <ToastContainer />
+      </StyledEngineProvider>
     </>
   );
 };

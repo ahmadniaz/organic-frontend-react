@@ -1,4 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
+import { useLocation } from "react-router-dom";
+import { useHistory } from "react-router";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
@@ -16,14 +18,14 @@ import Breadcrumb from "../breadcrumb/Breadcrumb";
 import ProductContext from "../../context/productContext/productContext";
 import Cart from "../../Assets/Cart.png";
 import MenuItem from "@mui/material/MenuItem";
-import UserContext from "../../context/usercontext/userContext";
 import Tooltip from "@mui/material/Tooltip";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
-import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import Avatar from "@mui/material/Avatar";
 import ListItemIcon from "@mui/material/ListItemIcon";
+import Menu from "@mui/material/Menu";
+import UserContext from "../../context/usercontext/userContext";
 
 function ElevationScroll(props) {
   const { children } = props;
@@ -86,34 +88,45 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Menu(props) {
+const MainMenu = () => {
   const productContext = useContext(ProductContext);
   const userContext = useContext(UserContext);
-  const { user } = userContext;
-  console.log(user, "in the Menu User");
+  const { handleLogout } = userContext;
   const { cartItems } = productContext;
   const [upperCase, setUpperCase] = useState("");
-  const [open, setOpen] = useState(false);
-  // const [anchorEl, setAnchorEl] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const [localUser, setLocalUser] = useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const history = useHistory();
+  // functions
 
-  // const handleClick = (event) => {
-  //   setAnchorEl(event.currentTarget);
-  // };
+  const handleLogoutClick = () => {
+    handleLogout();
+    history.push("/login");
+  };
 
-  // const handleClose = () => {
-  //   setAnchorEl(null);
-  // };
-  const getPageName = () => {
-    const path = window.location.pathname;
-    const page = path.split("/").pop();
-    setUpperCase(page.toUpperCase());
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(!anchorEl);
   };
 
   useEffect(() => {
-    getPageName();
-    //eslint-disable-next-line
+    const token = localStorage.getItem("user");
+    const tokenData = JSON.parse(token);
+    setLocalUser(tokenData);
   }, []);
 
+  const location = useLocation();
+  const path = location.pathname;
+  useEffect(() => {
+    const page = path.split("/").pop();
+    setUpperCase(page.toUpperCase());
+    //eslint-disable-next-line
+  }, [path]);
+  console.log(localUser, "my Name");
   const classes = useStyles();
   return (
     <>
@@ -146,13 +159,85 @@ export default function Menu(props) {
                   Contact{" "}
                 </Link>
               </div>
-              {open ? (
+              {localUser ? (
+                <>
+                  <Tooltip title="Account settings">
+                    <IconButton
+                      onClick={handleClick}
+                      size="small"
+                      sx={{ ml: 2 }}
+                    >
+                      <Avatar sx={{ width: 32, height: 32 }}>
+                        {localUser.user.username.charAt(0)}
+                      </Avatar>
+                    </IconButton>
+                  </Tooltip>
+                  {localUser.user.username.toUpperCase()}
+                  <Menu
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={handleClose}
+                    onClick={handleClose}
+                    PaperProps={{
+                      elevation: 0,
+                      sx: {
+                        overflow: "visible",
+                        filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+                        mt: 1.5,
+                        "& .MuiAvatar-root": {
+                          width: 32,
+                          height: 32,
+                          ml: -0.5,
+                          mr: 1,
+                        },
+                        "&:before": {
+                          content: '""',
+                          display: "block",
+                          position: "absolute",
+                          top: 0,
+                          right: 14,
+                          width: 10,
+                          height: 10,
+                          bgcolor: "background.paper",
+                          transform: "translateY(-50%) rotate(45deg)",
+                          zIndex: 0,
+                        },
+                      },
+                    }}
+                    transformOrigin={{ horizontal: "right", vertical: "top" }}
+                    anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+                  >
+                    <MenuItem>
+                      <Avatar /> Profile
+                    </MenuItem>
+                    <Divider />
+                    <MenuItem>
+                      <ListItemIcon>
+                        <SettingsIcon fontSize="small" />
+                      </ListItemIcon>
+                      Settings
+                    </MenuItem>
+                    <MenuItem onClick={handleLogoutClick}>
+                      <ListItemIcon>
+                        <LogoutIcon fontSize="small" />
+                      </ListItemIcon>
+                      Logout
+                    </MenuItem>
+                  </Menu>
+                </>
+              ) : (
+                <Link className={classes.tab} as={NavLink} to="/login">
+                  Login
+                </Link>
+              )}
+
+              {isOpen ? (
                 <div>
                   <img
                     alt="Search Icon"
                     src={SearchIcon}
                     className={classes.cart}
-                    onClick={() => setOpen(!open)}
+                    onClick={() => setIsOpen(!isOpen)}
                   />
                   <input
                     style={{
@@ -169,7 +254,7 @@ export default function Menu(props) {
                   alt="Search Icon"
                   src={SearchIcon}
                   className={classes.cart}
-                  onClick={() => setOpen(!open)}
+                  onClick={() => setIsOpen(!isOpen)}
                 />
               )}
               <Link className={classes.tab} as={NavLink} to="/cart">
@@ -191,4 +276,6 @@ export default function Menu(props) {
       </Grid>
     </>
   );
-}
+};
+
+export default MainMenu;

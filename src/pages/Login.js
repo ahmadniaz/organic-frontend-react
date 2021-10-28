@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import { useHistory } from "react-router";
 // import { GoogleLogin, GoogleLogout } from "react-google-login";
 // import FacebookLogin from "react-facebook-login";
 import { makeStyles } from "@material-ui/styles";
@@ -13,23 +14,12 @@ import UserContext from "../context/usercontext/userContext";
 // const clientId =
 //   "24636475881-mkr9q94rl59gsqjlubaimme9efres0nb.apps.googleusercontent.com";
 
-const Login = ({ history }) => {
+const Login = () => {
   // const [showloginButton, setShowloginButton] = useState(true);
   // const [showlogoutButton, setShowlogoutButton] = useState(false);
 
   const userContext = useContext(UserContext);
-  console.log(userContext, "in the login page context");
-  const { user, handleSubmit } = userContext;
-  console.log(user, "hello user");
-
-  useEffect(() => {
-    if (user) {
-      console.log(user, "User login");
-      localStorage.getItem("user", JSON.stringify(user));
-      history.push("/");
-    }
-    //eslint-disable-next-line
-  }, [user]);
+  const { handleSubmit } = userContext;
 
   // const onLoginSuccess = (res) => {
   //   console.log("Login Success:", res.profileObj);
@@ -137,7 +127,7 @@ const Login = ({ history }) => {
   }));
 
   const classes = useStyles();
-
+  const history = useHistory();
   return (
     <div className={classes.primaryDiv}>
       <div className={classes.mainDiv}>
@@ -155,8 +145,16 @@ const Login = ({ history }) => {
               .matches(/^(?=.{8,})/, "Passwords are usually 8 character long!"),
           })}
           onSubmit={async (values, { setSubmitting }) => {
-            await handleSubmit(values);
-            setSubmitting(false);
+            try {
+              const login = await handleSubmit(values);
+              if (login) {
+                history.push("/");
+              }
+            } catch (err) {
+              console.error(err);
+            } finally {
+              setSubmitting(false);
+            }
           }}
         >
           {({ isSubmitting, isValid, dirty }) => (
