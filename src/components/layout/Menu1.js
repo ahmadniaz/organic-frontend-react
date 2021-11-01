@@ -44,6 +44,15 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: "none",
     color: theme.palette.secondary.main,
   },
+  h1: {
+    ...theme.typography.secondary,
+    minWidth: 10,
+    marginLeft: "25px",
+    textDecoration: "none",
+    fontWeight: "bold",
+    color: theme.palette.secondary.main,
+    transform: "translate(-200%, -35px)",
+  },
   cart: {
     marginRight: "10px",
     minWidth: 10,
@@ -78,7 +87,6 @@ export default function Menu(props) {
     setUpperCase(page.toUpperCase());
     //eslint-disable-next-line
   }, [path]);
-
   const classes = useStyles();
   return (
     <Grid container>
@@ -86,7 +94,11 @@ export default function Menu(props) {
         <AppBar position="fixed" className={classes.bar}>
           <Toolbar disableGutters>
             <div className={classes.logo}>
-              <Link className={classes.tab} as={NavLink} to="/signup">
+              <Link
+                className={classes.tab}
+                as={NavLink}
+                to={path === "/login" ? "/signup" : "/login"}
+              >
                 <img
                   alt="company logo"
                   style={{ transform: "translate(70px, 50px)" }}
@@ -104,7 +116,16 @@ export default function Menu(props) {
               <h1 className={classes.pageName}>{upperCase}</h1>
             </div>
             <div>
-              <h1 className={classes.tab}>LOGIN</h1>
+              {path === "/login" ? (
+                <Link className={classes.tab} as={NavLink} to="/signup">
+                  {" "}
+                  <h1 className={classes.h1}>SignUp</h1>
+                </Link>
+              ) : (
+                <Link className={classes.tab} as={NavLink} to="/login">
+                  <h1 className={classes.h1}>LOGIN</h1>
+                </Link>
+              )}
             </div>
           </Toolbar>
         </AppBar>

@@ -1,26 +1,22 @@
-import {
-    GET_BLOGS,
-    BLOG_CLICK
-} from '../types';
-
+import { GET_BLOGS, BLOG_CLICK } from "../types";
 
 const blogReducer = (state, action) => {
-    switch (action.type) {
+  switch (action.type) {
+    case GET_BLOGS:
+      console.log(action.payload, "in the reducer blogs");
+      return {
+        ...state,
+        blogs: action.payload,
+      };
+    case BLOG_CLICK:
+      return {
+        ...state,
+        currentBlog: action.payload,
+      };
 
-        case GET_BLOGS:
-            return {
-                ...state,
-                blogs: action.payload,
-            }
-        case BLOG_CLICK:
-            return {
-                ...state,
-                currentBlog: action.payload
-            }
-
-        default:
-            return state;
-    };
-}
+    default:
+      return state;
+  }
+};
 
 export default blogReducer;

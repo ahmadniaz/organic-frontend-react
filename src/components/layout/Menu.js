@@ -19,7 +19,6 @@ import ProductContext from "../../context/productContext/productContext";
 import Cart from "../../Assets/Cart.png";
 import MenuItem from "@mui/material/MenuItem";
 import Tooltip from "@mui/material/Tooltip";
-import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
 import Divider from "@mui/material/Divider";
 import Avatar from "@mui/material/Avatar";
@@ -106,6 +105,10 @@ const MainMenu = () => {
     history.push("/login");
   };
 
+  const handleProfileClick = () => {
+    history.push("/profile");
+  };
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -125,7 +128,7 @@ const MainMenu = () => {
     const page = path.split("/").pop();
     setUpperCase(page.toUpperCase());
     //eslint-disable-next-line
-  }, [path]);
+  }, []);
   console.log(localUser, "my Name");
   const classes = useStyles();
   return (
@@ -207,16 +210,10 @@ const MainMenu = () => {
                     transformOrigin={{ horizontal: "right", vertical: "top" }}
                     anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
                   >
-                    <MenuItem>
+                    <MenuItem onClick={handleProfileClick}>
                       <Avatar /> Profile
                     </MenuItem>
                     <Divider />
-                    <MenuItem>
-                      <ListItemIcon>
-                        <SettingsIcon fontSize="small" />
-                      </ListItemIcon>
-                      Settings
-                    </MenuItem>
                     <MenuItem onClick={handleLogoutClick}>
                       <ListItemIcon>
                         <LogoutIcon fontSize="small" />

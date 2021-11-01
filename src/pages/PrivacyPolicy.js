@@ -5,8 +5,6 @@ import { makeStyles } from "@material-ui/styles";
 const PrivacyPolicy = () => {
 
 
-
-
     const useStyles = makeStyles(theme => ({
         paragraph: {
             ...theme.typography.primary,

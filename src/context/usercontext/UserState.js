@@ -27,7 +27,7 @@ const UserState = (props) => {
       type: "error",
     });
   };
-  // GET contacts
+  // Match User
   const handleSubmit = async (values) => {
     const { email, password } = values;
 

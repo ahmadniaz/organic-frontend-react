@@ -22,6 +22,8 @@ import ScrollToTop from "./components/scroll/Scroll";
 import SingleBlog from "./pages/SingleBlog";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
+import Settings from "./pages/Settings";
+import Profile from "./pages/Profile";
 import ProductState from "./context/productContext/ProductState";
 import BlogState from "./context/blogsContext/BlogState";
 import { ToastContainer } from "react-toastify";
@@ -34,6 +36,7 @@ const App = () => {
   const { user } = userContext;
   console.log(user, " In App user , User");
   const [localUser, setLocalUser] = useState("");
+  const [localBlog, setLocalBlog] = useState("");
 
   useEffect(() => {
     const token = localStorage.getItem("user");
@@ -41,6 +44,12 @@ const App = () => {
     setLocalUser(tokenData);
     console.log(localUser, "user in APP");
     //eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    const getBlog = localStorage.getItem("curBlog");
+    const blogData = JSON.parse(getBlog);
+    setLocalBlog(blogData);
   }, []);
 
   return (
@@ -52,7 +61,13 @@ const App = () => {
               <BrowserRouter>
                 {localUser || user ? <MainMenu /> : <Menu1 />}
                 <Switch>
-                  <Route exact path="/" component={Home} />
+                  <Route
+                    exact
+                    path="/"
+                    component={() => ( 
+                      localUser || user ? <Home /> : <Redirect to="/login" />
+                    )}
+                  />
                   <Route path="/about" component={About} />
                   <Route path="/store" component={Store} />
                   <Route
@@ -61,7 +76,12 @@ const App = () => {
                   />
                   <Route path="/contact" component={Contact} />
                   <Route path="/blog" component={Blog} />
-                  <Route path="/post" component={SingleBlog} />
+                  <Route
+                    path="/post"
+                    component={() =>
+                      localBlog && <SingleBlog localBlog={localBlog} />
+                    }
+                  />
                   <Route
                     path="/cart"
                     component={() =>
@@ -77,18 +97,15 @@ const App = () => {
                       localUser ? <Checkout /> : <Redirect to="/login" />
                     }
                   />
-                  <Route
-                    path="/login"
-                    component={() =>
-                      localUser || user ? <Redirect to="/" /> : <Login />
-                    }
-                  />
+                  <Route exact path="/login" component={Login} />
                   <Route
                     path="/signup"
                     component={() =>
                       localUser ? <Redirect to="/" /> : <SignUp />
                     }
                   />
+                  <Route path="/profile" component={Profile} />
+                  <Route path="/settings" component={Settings} />
                   <Route component={Error} />
                 </Switch>
                 <ScrollToTop />

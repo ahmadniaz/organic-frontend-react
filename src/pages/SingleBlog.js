@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext } from "react";
 import Grid from "@material-ui/core/Grid";
 import BlogContext from "../context/blogsContext/blogContext";
 import IconGrid from "../components/items/IconGrid";
@@ -6,22 +6,11 @@ import NewsLetter from "../components/newsletter/NewsLetter";
 import { makeStyles } from "@material-ui/styles";
 import { Link, NavLink } from "react-router-dom";
 
-const SingleBlog = () => {
+const SingleBlog = ({ localBlog }) => {
   const blogContext = useContext(BlogContext);
-  const { currentBlog, handleBlogClick, blogs } = blogContext;
-  const [curBlog, setCurUserBlog] = useState(currentBlog);
-  useEffect(() => {
-    const localProducts = JSON.parse(localStorage.getItem("curBlog")) || [];
-    setCurUserBlog(localProducts);
-  }, []);
+  const { handleBlogClick, blogs } = blogContext;
 
-  useEffect(() => {
-    if (currentBlog) {
-      localStorage.setItem("curBlog", JSON.stringify(curBlog || []));
-    }
-    //eslint-disable-next-line
-  }, []);
-  const data = curBlog.detailedDescription.split("\n");
+  const data = localBlog.detailedDescription.split("\n");
 
   const useStyles = makeStyles((theme) => ({
     paragraph: {
@@ -68,11 +57,11 @@ const SingleBlog = () => {
       }}
     >
       <div>
-        <h1 className={classes.title}>{curBlog.title}</h1>
+        <h1 className={classes.title}>{localBlog.title}</h1>
         <div style={{ marginBottom: "5%" }}>
           <img
             alt="NEWS 1"
-            src={`http://localhost:1337${curBlog.image.url}`}
+            src={`http://localhost:1337${localBlog.image.url}`}
             style={{ width: "180vh", height: "50vh" }}
           />
         </div>
