@@ -15,6 +15,7 @@ import UserContext from "../context/usercontext/userContext";
 //   "24636475881-mkr9q94rl59gsqjlubaimme9efres0nb.apps.googleusercontent.com";
 
 const Login = () => {
+  const history = useHistory();
   // const [showloginButton, setShowloginButton] = useState(true);
   // const [showlogoutButton, setShowlogoutButton] = useState(false);
 
@@ -127,7 +128,7 @@ const Login = () => {
   }));
 
   const classes = useStyles();
-  const history = useHistory();
+
   return (
     <div className={classes.primaryDiv}>
       <div className={classes.mainDiv}>
@@ -146,14 +147,11 @@ const Login = () => {
           })}
           onSubmit={async (values, { setSubmitting }) => {
             try {
-              const login = await handleSubmit(values);
-              if (login) {
-                history.push("/");
-              }
-            } catch (err) {
-              console.error(err);
-            } finally {
+              await handleSubmit(values);
               setSubmitting(false);
+              history.push("/");
+            } catch (err) {
+              console.log("error Logging in");
             }
           }}
         >

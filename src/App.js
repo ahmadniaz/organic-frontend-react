@@ -42,7 +42,6 @@ const App = () => {
     const token = localStorage.getItem("user");
     const tokenData = JSON.parse(token);
     setLocalUser(tokenData);
-    console.log(localUser, "user in APP");
     //eslint-disable-next-line
   }, []);
 
@@ -61,13 +60,7 @@ const App = () => {
               <BrowserRouter>
                 {localUser || user ? <MainMenu /> : <Menu1 />}
                 <Switch>
-                  <Route
-                    exact
-                    path="/"
-                    component={() => ( 
-                      localUser || user ? <Home /> : <Redirect to="/login" />
-                    )}
-                  />
+                  <Route exact path="/" component={Home} />
                   <Route path="/about" component={About} />
                   <Route path="/store" component={Store} />
                   <Route
@@ -76,34 +69,18 @@ const App = () => {
                   />
                   <Route path="/contact" component={Contact} />
                   <Route path="/blog" component={Blog} />
-                  <Route
-                    path="/post"
-                    component={() =>
-                      localBlog && <SingleBlog localBlog={localBlog} />
-                    }
-                  />
-                  <Route
-                    path="/cart"
-                    component={() =>
-                      localUser || user ? <Cart /> : <Redirect to="/login" />
-                    }
-                  />
+                  <Route path="/post" component={SingleBlog} />
+                  <Route path="/cart" component={Cart} />
                   <Route path="/termsofservices" component={TermsOfServices} />
                   <Route path="/privacypolicy" component={PrivacyPolicy} />
                   <Route path="/faq's" component={FAQs} />
-                  <Route
-                    path="/checkout"
-                    component={() =>
-                      localUser ? <Checkout /> : <Redirect to="/login" />
-                    }
-                  />
-                  <Route exact path="/login" component={Login} />
-                  <Route
-                    path="/signup"
-                    component={() =>
-                      localUser ? <Redirect to="/" /> : <SignUp />
-                    }
-                  />
+                  <Route path="/checkout" component={Checkout} />
+                  {localUser && user ? (
+                    <Redirect to="/" />
+                  ) : (
+                    <Route path="/login" component={Login} />
+                  )}
+                  <Route path="/signup" component={SignUp} />
                   <Route path="/profile" component={Profile} />
                   <Route path="/settings" component={Settings} />
                   <Route component={Error} />

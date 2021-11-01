@@ -100,6 +100,12 @@ const MainMenu = () => {
   const history = useHistory();
   // functions
 
+  useEffect(() => {
+    const token = localStorage.getItem("user");
+    const tokenData = JSON.parse(token);
+    setLocalUser(tokenData);
+  }, []);
+
   const handleLogoutClick = () => {
     handleLogout();
     history.push("/login");
@@ -116,20 +122,14 @@ const MainMenu = () => {
     setAnchorEl(!anchorEl);
   };
 
-  useEffect(() => {
-    const token = localStorage.getItem("user");
-    const tokenData = JSON.parse(token);
-    setLocalUser(tokenData);
-  }, []);
-
   const location = useLocation();
   const path = location.pathname;
   useEffect(() => {
     const page = path.split("/").pop();
     setUpperCase(page.toUpperCase());
     //eslint-disable-next-line
-  }, []);
-  console.log(localUser, "my Name");
+  }, [path]);
+  console.log(upperCase, "PAth");
   const classes = useStyles();
   return (
     <>
@@ -162,7 +162,7 @@ const MainMenu = () => {
                   Contact{" "}
                 </Link>
               </div>
-              {localUser ? (
+              {localUser && localUser ? (
                 <>
                   <Tooltip title="Account settings">
                     <IconButton
