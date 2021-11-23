@@ -69,10 +69,12 @@ const App = () => {
                   />
                   <Route path="/contact" component={Contact} />
                   <Route path="/blog" component={Blog} />
-                  <Route path="/post"  component={() =>
+                  <Route
+                    path="/post"
+                    component={() =>
                       localBlog && <SingleBlog localBlog={localBlog} />
                     }
-                  /> 
+                  />
                   <Route path="/cart" component={Cart} />
                   <Route path="/termsofservices" component={TermsOfServices} />
                   <Route path="/privacypolicy" component={PrivacyPolicy} />

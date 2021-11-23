@@ -31,11 +31,12 @@ const NewsLetter = () => {
     floatingDiv: {
       position: "relative",
       top: "-45%",
-      left:'4%'
+      left: "4%",
     },
     inputField: {
       borderRadius: "20px",
-      padding: "7px 95px 10px 190px",
+      padding: "9px",
+      width: "60%",
       borderColor: theme.palette.secondary.light,
       borderSize: "1px",
       "&::placeholder": {
@@ -46,7 +47,7 @@ const NewsLetter = () => {
       ...theme.typography.secondary,
       backgroundColor: theme.palette.secondary.contrastText,
       color: theme.palette.secondary.main,
-      marginTop: 0,
+      top: "-2px",
       fontWeight: "bold",
       borderRadius: "20px",
       borderWidth: "3px ",
@@ -64,7 +65,7 @@ const NewsLetter = () => {
   return (
     <>
       <Grid
-      className={classes.mainGrid}
+        className={classes.mainGrid}
         container
         style={{
           backgroundColor: theme.palette.primary.dark,
@@ -95,7 +96,7 @@ const NewsLetter = () => {
             <img
               alt="Limes"
               src={Mint}
-              style={{  width: "85%", marginLeft: "30px" }}
+              style={{ width: "85%", marginLeft: "30px" }}
             />
           </div>
         </Grid>

@@ -146,13 +146,13 @@ const Login = () => {
               .matches(/^(?=.{8,})/, "Passwords are usually 8 character long!"),
           })}
           onSubmit={async (values, { setSubmitting }) => {
-            console.log(values, "SUCCESS, OR FAIL");
             try {
               await handleSubmit(values);
-              setSubmitting(false);
               history.push("/");
             } catch (err) {
               console.log("error Logging in");
+            } finally {
+              setSubmitting(false);
             }
           }}
         >
