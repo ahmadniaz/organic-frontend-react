@@ -35,7 +35,7 @@ const NewsLetter = () => {
     },
     inputField: {
       borderRadius: "20px",
-      padding: "9px",
+      padding: "11px",
       width: "60%",
       borderColor: theme.palette.secondary.light,
       border: "0px",
