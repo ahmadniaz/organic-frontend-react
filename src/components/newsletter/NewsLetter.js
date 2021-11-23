@@ -38,9 +38,14 @@ const NewsLetter = () => {
       padding: "9px",
       width: "60%",
       borderColor: theme.palette.secondary.light,
+      border: "0px",
       borderSize: "1px",
       "&::placeholder": {
         color: theme.palette.secondary.dark,
+      },
+      "&:focus": {
+        border: "none",
+        outline: "none",
       },
     },
     button: {
