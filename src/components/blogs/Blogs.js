@@ -49,7 +49,7 @@ const Blogs = () => {
             <Grid container style={{ marginTop: '10%' }}>
                 {blogs.map((blog) => (
                     <Grid key={blog.id} item xs={4} style={{ textAlign: 'center', marginBottom: '5%' }}>
-                        <img alt="NEWS 1" src={`http://localhost:1337${blog.image.url}`} style={{ width: '95%', height: '70%' }} />
+                        <img alt="NEWS 1" src={`https://strapi-backend-organic.herokuapp.com${blog.image.url}`} style={{ width: '95%', height: '70%' }} />
                         <Link className={classes.tab} as={NavLink} to='/post'>
                             <p className={classes.firstPara} onClick={() => { handleBlogClick(blog) }}>{blog.title}</p></Link>
                         <p className={classes.secondPara}>{blog.description}</p>

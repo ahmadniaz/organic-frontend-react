@@ -145,7 +145,7 @@ const BestSellerProducts = () => {
                 {products.slice(0, 8).map((product) => (
                     <Grid item xs={3} key={product.id} >
                         <div className={classes.productDiv}>
-                            <img alt="product1" src={`http://localhost:1337${product.image.url}`} style={{ width: '95%', }} />
+                            <img alt="product1" src={`https://strapi-backend-organic.herokuapp.com${product.image.url}`} style={{ width: '95%', }} />
                         </div>
                         <div style={{ display: 'flex' }}>
 

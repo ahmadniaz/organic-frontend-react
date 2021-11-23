@@ -140,7 +140,7 @@ const SignUp = () => {
           onSubmit={async (values, { setSubmitting }) => {
             try {
               await axios.post(
-                "http://localhost:1337/auth/local/register",
+                "https://strapi-backend-organic.herokuapp.com/auth/local/register",
                 values
               );
               history.push("/login");

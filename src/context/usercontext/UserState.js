@@ -32,7 +32,7 @@ const UserState = (props) => {
     const { email, password } = values;
 
     try {
-      const response = await axios.post("http://localhost:1337/auth/local/", {
+      const response = await axios.post("https://strapi-backend-organic.herokuapp.com/auth/local/", {
         identifier: email,
         password,
         withCredentials: true,
