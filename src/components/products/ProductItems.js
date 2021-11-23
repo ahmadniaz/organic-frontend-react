@@ -55,6 +55,7 @@ const ProductItems = () => {
       `https://strapi-backend-organic.herokuapp.com/products`
     );
     setProducts(res.data);
+    console.log(res.data, "Data through get API");
     setLoading(false);
     const decimal = products.length / 8 - Math.floor(products.length / 8) !== 0;
     setNoOfPages(
@@ -157,7 +158,7 @@ const ProductItems = () => {
                 <div className={classes.productDiv}>
                   <img
                     alt="product1"
-                    src={`https://strapi-backend-organic.herokuapp.com${product.image.url}`}
+                    src={`{product.image.url}`}
                     style={{ width: "95%" }}
                   />
                 </div>
