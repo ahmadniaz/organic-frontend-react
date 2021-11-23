@@ -8,7 +8,7 @@ import RemoveIcon from "@material-ui/icons/Remove";
 import EmptyCart from "../components/emptycart/emptyCart";
 import NewsLetter from "../components/newsletter/NewsLetter";
 
-import { Button } from '@material-ui/core';
+import { Button } from "@material-ui/core";
 import { Link, NavLink } from "react-router-dom";
 
 const Cart = () => {
@@ -105,9 +105,9 @@ const Cart = () => {
       fontSize: "36px",
       fontWeight: "bold",
     },
-    tab:{
-      textDecoration:'none'
-    }
+    tab: {
+      textDecoration: "none",
+    },
   }));
   const classes = useStyles();
   return (
@@ -115,7 +115,7 @@ const Cart = () => {
       {!loading && cartItems && cartItems.length === 0 && total === 0 ? (
         <EmptyCart />
       ) : (
-        <div style={{textAlign:'center'}}>
+        <div style={{ textAlign: "center" }}>
           <Grid container className={classes.mainDiv}>
             <Grid xs={1}></Grid>
             <Grid item xs={2}>
@@ -151,9 +151,7 @@ const Cart = () => {
                     <div className={classes.productDiv}>
                       <img
                         alt="product1"
-                        src={`https://strapi-backend-organic.herokuapp.com${
-                          item && item.product.image.url
-                        }`}
+                        src={item && item.product.image.url}
                         style={{ width: "95%" }}
                       />
                     </div>
@@ -209,7 +207,7 @@ const Cart = () => {
               </Grid>
             ))}
           <Grid container className={classes.bottomDiv}>
-            <Grid item xs={6} style={{textAlign: 'initial'}}>
+            <Grid item xs={6} style={{ textAlign: "initial" }}>
               <h3> Total Products</h3>
               <h3> Sub Total</h3>
               <h1 className={classes.title}> Total</h1>
@@ -221,16 +219,26 @@ const Cart = () => {
             </Grid>
           </Grid>
           <Link className={classes.tab} as={NavLink} to="/checkout">
-          <Button variant="contained" color='secondary' 
-          style={{textAlign:'center', marginTop:'5%', borderRadius:''}}
-          >Checkout</Button>
+            <Button
+              variant="contained"
+              color="secondary"
+              style={{ textAlign: "center", marginTop: "5%", borderRadius: "" }}
+            >
+              Checkout
+            </Button>
           </Link>
         </div>
       )}
-      <div style={{ width: "95%", marginLeft: "auto", marginRight: "auto", marginTop:'20%' }}>
-        <NewsLetter/>
+      <div
+        style={{
+          width: "95%",
+          marginLeft: "auto",
+          marginRight: "auto",
+          marginTop: "20%",
+        }}
+      >
+        <NewsLetter />
       </div>
-
     </>
   );
 };
