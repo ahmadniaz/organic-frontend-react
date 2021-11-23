@@ -4,7 +4,7 @@ import { Link, NavLink, useHistory } from "react-router-dom";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { toast, Slide } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"; 
+import "react-toastify/dist/ReactToastify.css";
 import Button from "@restart/ui/esm/Button";
 import axios from "axios";
 import { MyInputField } from "../components/form/MyInputField";
@@ -140,7 +140,7 @@ const SignUp = () => {
           onSubmit={async (values, { setSubmitting }) => {
             try {
               await axios.post(
-                "https://strapi-backend-organic.herokuapp.com/auth/local/register",
+                "http://localhost:1337/auth/local/register",
                 values
               );
               history.push("/login");
