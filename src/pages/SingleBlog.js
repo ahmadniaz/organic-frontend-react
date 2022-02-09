@@ -61,7 +61,7 @@ const SingleBlog = ({ localBlog }) => {
         <div style={{ marginBottom: "5%" }}>
           <img
             alt="NEWS 1"
-            src={`https://strapi-backend-organic.herokuapp.com${localBlog.image.url}`}
+            src={`http://localhost:1337${localBlog.image.url}`}
             style={{ width: "180vh", height: "50vh" }}
           />
         </div>
@@ -87,7 +87,7 @@ const SingleBlog = ({ localBlog }) => {
             >
               <img
                 alt="NEWS 1"
-                src={`https://strapi-backend-organic.herokuapp.com${blog.image.url}`}
+                src={`http://localhost:1337${blog.image.url}`}
                 style={{ width: "95%", height: "70%" }}
               />
               <Link className={classes.tab} as={NavLink} to="/post">

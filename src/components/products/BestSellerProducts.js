@@ -148,7 +148,7 @@ const BestSellerProducts = () => {
             <div className={classes.productDiv}>
               <img
                 alt="product1"
-                src={`https://strapi-backend-organic.herokuapp.com${product.image.url}`}
+                src={`http://localhost:1337${product.image.url}`}
                 style={{ width: "95%" }}
               />
             </div>
