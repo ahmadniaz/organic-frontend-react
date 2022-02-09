@@ -51,7 +51,7 @@ const ProductItems = () => {
   };
   const getProducts = async () => {
     setLoading(true);
-    const res = await axios.get(`https://react-strapi-frontend.herokuapp.com/products`);
+    const res = await axios.get(`https://strapi-backend-organic.herokuapp.com/products`);
     setProducts(res.data);
     setLoading(false);
     const decimal = products.length / 8 - Math.floor(products.length / 8) !== 0;
