@@ -51,7 +51,7 @@ const ProductItems = () => {
   };
   const getProducts = async () => {
     setLoading(true);
-    const res = await axios.get(`http://localhost:1337/products`);
+    const res = await axios.get(`https://react-strapi-frontend.herokuapp.com/products`);
     setProducts(res.data);
     setLoading(false);
     const decimal = products.length / 8 - Math.floor(products.length / 8) !== 0;
@@ -155,7 +155,7 @@ const ProductItems = () => {
                 <div className={classes.productDiv}>
                   <img
                     alt="product1"
-                    src={`http://localhost:1337${product.image.url}`}
+                    src={`https://strapi-backend-organic.herokuapp.com${product.image.url}`}
                     style={{ width: "95%" }}
                   />
                 </div>
