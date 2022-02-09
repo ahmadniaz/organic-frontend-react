@@ -75,11 +75,7 @@ const App = () => {
                       localBlog && <SingleBlog localBlog={localBlog} />
                     }
                   />
-                  {localUser && user ? (
-                    <Route path="/cart" component={Cart} />
-                  ) : (
-                    <Redirect to="/login" />
-                  )}
+                  <Route path="/cart" component={Cart} />
                   <Route path="/termsofservices" component={TermsOfServices} />
                   <Route path="/privacypolicy" component={PrivacyPolicy} />
                   <Route path="/faq's" component={FAQs} />

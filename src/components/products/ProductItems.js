@@ -51,9 +51,7 @@ const ProductItems = () => {
   };
   const getProducts = async () => {
     setLoading(true);
-    const res = await axios.get(
-      `http://localhost:1337/products`
-    );
+    const res = await axios.get(`http://localhost:1337/products`);
     setProducts(res.data);
     setLoading(false);
     const decimal = products.length / 8 - Math.floor(products.length / 8) !== 0;
