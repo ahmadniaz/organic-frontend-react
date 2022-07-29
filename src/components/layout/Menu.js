@@ -4,12 +4,10 @@ import { useHistory } from "react-router";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
-import { makeStyles } from "@material-ui/styles";
 import { theme } from "../Theme";
 import Badge from "@material-ui/core/Badge";
 import Grid from "@material-ui/core/Grid";
 import LogoCropped from "../../Assets/LogoCropped.png";
-import WaveTop from "../../Assets/WaveTop.png";
 import { withStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "../../Assets/svg/SearchIcon.svg";
@@ -25,6 +23,8 @@ import Avatar from "@mui/material/Avatar";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Menu from "@mui/material/Menu";
 import UserContext from "../../context/usercontext/userContext";
+
+import useStyles from "./layoutStyling";
 
 function ElevationScroll(props) {
   const { children } = props;
@@ -46,47 +46,6 @@ const StyledBadge = withStyles((theme) => ({
   },
 }))(Badge);
 
-const useStyles = makeStyles((theme) => ({
-  toolbarMargin: {
-    ...theme.mixins.toolbar,
-    marginBottom: "5em",
-  },
-  logo: {
-    height: "8em",
-  },
-  bar: {
-    backgroundImage: `url(${WaveTop})`,
-    backgroundSize: "112% 102%",
-    marginTop: 0,
-    marginBottom: "70px",
-  },
-  link: {
-    margin: "auto",
-  },
-  tab: {
-    ...theme.typography.secondary,
-    minWidth: 10,
-    marginLeft: "25px",
-    textDecoration: "none",
-    color: theme.palette.secondary.main,
-  },
-  cart: {
-    marginRight: "10px",
-    minWidth: 10,
-    marginLeft: "25px",
-    height: "1em",
-    marginTop: "2px",
-    cursor: "pointer",
-  },
-  pageName: {
-    marginLeft: "10%",
-    ...theme.typography.secondary,
-    fontSize: "42px",
-    fontWeight: "bold",
-    color: theme.palette.secondary.main,
-  },
-}));
-
 const MainMenu = () => {
   const productContext = useContext(ProductContext);
   const userContext = useContext(UserContext);
@@ -96,6 +55,7 @@ const MainMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [localUser, setLocalUser] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [fix, setFix] = useState(false);
   const open = Boolean(anchorEl);
   const history = useHistory();
   // functions
@@ -129,14 +89,23 @@ const MainMenu = () => {
     setUpperCase(page.toUpperCase());
     //eslint-disable-next-line
   }, [path]);
-  console.log(upperCase, "PAth");
+
+  const setFixed = () => {
+    if (window.scrollY >= 30) {
+      setFix(true);
+    } else {
+      setFix(false);
+    }
+  };
+  window.addEventListener("scroll", setFixed);
+
   const classes = useStyles();
   return (
     <>
       <Grid container>
         <ElevationScroll>
           <AppBar position="fixed" className={classes.bar}>
-            <Toolbar disableGutters>
+            <Toolbar disableGutters className={fix ? classes.fixedNav : ""}>
               <div className={classes.logo}>
                 <img
                   alt="company logo"
@@ -265,8 +234,10 @@ const MainMenu = () => {
                 </IconButton>
               </Link>
             </Toolbar>
-            <h1 className={classes.pageName}>{upperCase}</h1>
-            <Breadcrumb />
+            <h1 className={fix ? classes.fixedNav : classes.pageName}>
+              {upperCase}
+              <Breadcrumb />
+            </h1>
           </AppBar>
         </ElevationScroll>
         <div className={classes.toolbarMargin} />

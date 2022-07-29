@@ -3,11 +3,12 @@ import { useLocation } from "react-router";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
-import { makeStyles } from "@material-ui/styles";
 import Grid from "@material-ui/core/Grid";
 import ArrowRight from "../../Assets/ArrowRight.png";
-import WaveTop from "../../Assets/WaveTop.png";
+
 import { NavLink, Link } from "react-router-dom";
+
+import useStyles from "./layoutStyling";
 
 function ElevationScroll(props) {
   const { children } = props;
@@ -19,56 +20,6 @@ function ElevationScroll(props) {
     elevation: trigger ? 4 : 0,
   });
 }
-
-const useStyles = makeStyles((theme) => ({
-  toolbarMargin: {
-    ...theme.mixins.toolbar,
-    marginBottom: "5em",
-  },
-  logo: {
-    height: "8em",
-  },
-  bar: {
-    backgroundImage: `url(${WaveTop})`,
-    backgroundSize: "100% 100%",
-    marginTop: 0,
-    marginBottom: "70px",
-  },
-  link: {
-    margin: "auto",
-  },
-  tab: {
-    ...theme.typography.secondary,
-    minWidth: 10,
-    marginLeft: "25px",
-    textDecoration: "none",
-    color: theme.palette.secondary.main,
-  },
-  h1: {
-    ...theme.typography.secondary,
-    minWidth: 10,
-    marginLeft: "25px",
-    textDecoration: "none",
-    fontWeight: "bold",
-    color: theme.palette.secondary.main,
-    transform: "translate(-200%, -35px)",
-  },
-  cart: {
-    marginRight: "10px",
-    minWidth: 10,
-    marginLeft: "25px",
-    height: "1em",
-    marginTop: "2px",
-    cursor: "pointer",
-  },
-  pageName: {
-    marginLeft: "10%",
-    ...theme.typography.secondary,
-    fontSize: "42px",
-    fontWeight: "bold",
-    color: theme.palette.secondary.main,
-  },
-}));
 
 export default function Menu(props) {
   const [upperCase, setUpperCase] = useState("");

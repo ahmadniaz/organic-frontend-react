@@ -6,9 +6,8 @@ export const useStyles = makeStyles((theme) => ({
     marginRight: "50px",
     marginLeft: "50px",
     padding: 0,
-    overflowX: "hidden",
-    overflowY: "hidden",
     position: "relative",
+    height: "auto",
   },
   firstHeading: {
     ...theme.typography.secondary,
@@ -31,6 +30,16 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: "50px",
     textAlign: "center",
   },
+
+  // FirstHeading: {
+  //   ...theme.typography.primary,
+  //   color: theme.palette.secondary.light,
+  //   letterSpacing: "1px",
+  //   fontSize: "18px",
+  //   marginBottom: 0,
+  //   height: "5%",
+  // },
+
   button: {
     ...theme.typography.secondary,
     color: theme.palette.secondary.main,
@@ -51,6 +60,7 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: "17px",
     marginBottom: 0,
   },
+
   productPrice: {
     ...theme.typography.primary,
     color: theme.palette.primary.dark,
@@ -58,6 +68,7 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: "14px",
     marginBottom: 0,
   },
+
   bagIcon: {
     height: "50px",
     float: "right",
@@ -84,6 +95,7 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: 0,
     height: "20%",
   },
+
   fourthHeading: {
     ...theme.typography.primary,
     color: theme.palette.secondary.light,
@@ -91,10 +103,51 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: "18px",
     maxWidth: "450px",
   },
+
   floatingDiv: {
     position: "relative",
     top: "-80px",
   },
+  on1: {
+    ...theme.typography.secondary,
+    color: theme.palette.secondary.light,
+    marginTop: 0,
+    fontWeight: "bold",
+    borderRadius: "20px",
+    borderWidth: "3px ",
+    borderColor: theme.palette.secondary.light,
+    padding: "5px 35px 5px 35px",
+  },
+
+  loadMore: {
+    ...theme.typography.secondary,
+    backgroundColor: theme.palette.secondary.contrastText,
+    color: theme.palette.secondary.main,
+    fontWeight: "bold",
+    borderRadius: "20px",
+    borderWidth: "3px ",
+    padding: "5px 35px 7px 35px",
+    position: "relative",
+    "&:hover": {
+      backgroundColor: theme.palette.secondary.main,
+      color: theme.palette.secondary.light,
+    },
+  },
+  root: {
+    "& > * + *": {
+      marginTop: theme.spacing(2),
+    },
+  },
+  tab: {
+    textDecoration: "none",
+  },
+
+  mainGrid: {
+    width: "95%",
+    marginRight: "auto",
+    marginLeft: "auto",
+  },
+
   button1: {
     ...theme.typography.secondary,
     color: theme.palette.secondary.light,
@@ -105,12 +158,7 @@ export const useStyles = makeStyles((theme) => ({
     borderColor: theme.palette.secondary.light,
     padding: "5px 35px 5px 35px",
   },
-  root: {
-    "& > * + *": {
-      marginTop: theme.spacing(2),
-    },
-  },
-  tab: {
-    textDecoration: "none",
-  },
 }));
+
+
+export default useStyles

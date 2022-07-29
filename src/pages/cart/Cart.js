@@ -1,0 +1,166 @@
+import React, { useContext, useEffect } from "react";
+import Grid from "@material-ui/core/Grid";
+import ProductContext from "../../context/productContext/productContext";
+import DeleteIcon from "../../Assets/DeleteIcon.png";
+import AddIcon from "@material-ui/icons/Add";
+import RemoveIcon from "@material-ui/icons/Remove";
+import EmptyCart from "../../components/emptycart/emptyCart";
+import NewsLetter from "../../components/newsletter/NewsLetter";
+
+import { Button } from "@material-ui/core";
+import { Link, NavLink } from "react-router-dom";
+
+import useStyles from "./cartStyling";
+
+const Cart = () => {
+  const productContext = useContext(ProductContext);
+  const {
+    doCartDecrement,
+    doCartIncrement,
+    handleInputChange,
+    cartItems,
+    removeCartItem,
+    loading,
+    total,
+  } = productContext;
+  useEffect(() => {
+    //eslint-disable-next-line
+  }, []);
+
+  const classes = useStyles();
+  return (
+    <>
+      {!loading && cartItems && cartItems.length === 0 && total === 0 ? (
+        <EmptyCart />
+      ) : (
+        <div style={{ textAlign: "center" }}>
+          <Grid container className={classes.mainDiv}>
+            <Grid xs={1}></Grid>
+            <Grid item xs={2}>
+              <h1 className={classes.title}>Products</h1>
+            </Grid>
+            <Grid xs={3}></Grid>
+            <Grid
+              item
+              xs={6}
+              style={{ display: "flex", justifyContent: "space-evenly" }}
+            >
+              <Grid item xs={3}>
+                <h1 className={classes.title}>Quantity</h1>
+              </Grid>
+              <Grid item xs={1}>
+                <h1 className={classes.title}>Price</h1>
+              </Grid>
+              <Grid item xs={2}>
+                <h1 className={classes.title}>Remove</h1>
+              </Grid>
+            </Grid>
+          </Grid>
+
+          {cartItems &&
+            cartItems.map((item) => (
+              <Grid container className={classes.secondDiv}>
+                <Grid
+                  item
+                  xs={6}
+                  style={{ display: "flex", justifyContent: "space-evenly" }}
+                >
+                  <Grid item xs={3}>
+                    <div className={classes.productDiv}>
+                      <img
+                        alt="product1"
+                        src={`http://localhost:1337${
+                          item && item.product.image.url
+                        }`}
+                        style={{ width: "95%" }}
+                      />
+                    </div>
+                  </Grid>
+                  <Grid item xs={3} style={{ alignSelf: "center" }}>
+                    <h1 className={classes.title}>
+                      {item && item.product.title}
+                    </h1>
+                  </Grid>
+                </Grid>
+                <Grid
+                  Grid
+                  item
+                  xs={6}
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-evenly",
+                    alignSelf: "center",
+                  }}
+                >
+                  <Grid item xs={3} style={{ alignSelf: "center" }}>
+                    <RemoveIcon
+                      style={{ cursor: "pointer" }}
+                      onClick={() => doCartDecrement(item.num, item.product)}
+                    />
+                    <input
+                      className={classes.input}
+                      type="text"
+                      value={item.num}
+                      onChange={handleInputChange}
+                    />
+                    <AddIcon
+                      style={{ cursor: "pointer" }}
+                      onClick={() => doCartIncrement(item.num, item.product)}
+                    />
+                  </Grid>
+                  <Grid item xs={1} style={{ alignSelf: "center" }}>
+                    <h1 className={classes.price}>
+                      {" "}
+                      {item && item.product.price}.00 pkr
+                    </h1>
+                  </Grid>
+                  <Grid item xs={2} style={{ textAlign: "center" }}>
+                    <img
+                      alt="Delete"
+                      src={DeleteIcon}
+                      className={classes.deleteIcon}
+                      onClick={() => removeCartItem(item.product, item.num)}
+                    />
+                  </Grid>
+                </Grid>
+                <hr />
+              </Grid>
+            ))}
+          <Grid container className={classes.bottomDiv}>
+            <Grid item xs={6} style={{ textAlign: "initial" }}>
+              <h3> Total Products</h3>
+              <h3> Sub Total</h3>
+              <h1 className={classes.title}> Total</h1>
+            </Grid>
+            <Grid item xs={6} style={{ textAlignLast: "right" }}>
+              <h3> {cartItems.length}</h3>
+              <h3>{total}.00 pkr</h3>
+              <h1 className={classes.total}>{total}.00 pkr</h1>
+            </Grid>
+          </Grid>
+          <Link className={classes.tab} as={NavLink} to="/checkout">
+            <Button
+              variant="contained"
+              color="secondary"
+              style={{ textAlign: "center", marginTop: "5%", borderRadius: "" }}
+            >
+              Checkout
+            </Button>
+          </Link>
+        </div>
+      )}
+      <div
+        style={{
+          width: "95%",
+          marginLeft: "auto",
+          marginRight: "auto",
+          marginTop: "20%",
+        }}
+      >
+        <NewsLetter />
+      </div>
+    </>
+  );
+};
+
+export default Cart;

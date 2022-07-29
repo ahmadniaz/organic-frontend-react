@@ -1,13 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import Grid from "@material-ui/core/Grid";
-import { theme } from "../Theme";
 import axios from "axios";
 import ProductContext from "../../context/productContext/productContext";
 import BuyIcon from "../../Assets/svg/BuyIcon.svg";
-import Pagination from "@material-ui/lab/Pagination";
 import { useStyles } from "./ProductStyling";
 import Loader from "react-spinners/PropagateLoader";
-
+import { Button } from "@material-ui/core";
 import ToggleFilter from "../filter/ToggleFilter";
 import { Link, NavLink } from "react-router-dom";
 import FormControl from "@material-ui/core/FormControl";
@@ -30,39 +28,30 @@ const ProductItems = () => {
     clearFilter,
     handleAddToCart,
   } = productContext;
-  const [sliced1, setSliced1] = useState(0);
+
   const [products, setProducts] = useState([]);
-  const [sliced2, setSliced2] = useState(productLimit);
-  const [noOfPages, setNoOfPages] = useState(
-    products && products.length / productLimit
-  );
+
   const [loading, setLoading] = useState(false);
+  const [next, setNext] = useState(productLimit);
 
-  const handleChange = (e, value) => {
-    e.preventDefault();
-
-    if (value === 1) {
-      setSliced1(0);
-      setSliced2(productLimit);
-    } else {
-      setSliced1(value * productLimit - productLimit);
-      setSliced2(value * productLimit);
-    }
-  };
   const getProducts = async () => {
     setLoading(true);
     const res = await axios.get(`http://localhost:1337/products`);
     setProducts(res.data);
     setLoading(false);
-    const decimal = products.length / 8 - Math.floor(products.length / 8) !== 0;
-    setNoOfPages(
-      decimal ? Math.floor(products.length / 8) + 1 : products.length / 8
-    );
   };
+
   useEffect(() => {
     getProducts();
+
     //eslint-disable-next-line
   }, []);
+
+  const handleChange = () => {
+    setNext(next + productLimit);
+  };
+
+  const sliced = products.slice(0, next);
 
   const handleSort = (e) => {
     e.preventDefault();
@@ -116,10 +105,6 @@ const ProductItems = () => {
                 All Products
               </p>
             </Grid>
-            <p style={{ color: theme.palette.secondary.main }}>
-              Viewing {sliced1 + 1} to {sliced2} product of{" "}
-              {products && products.length}products
-            </p>
           </Grid>
 
           <Grid item xs={6}>
@@ -150,7 +135,7 @@ const ProductItems = () => {
       ) : (
         <Grid container spacing={3}>
           {products &&
-            products.slice(sliced1, sliced2).map((product) => (
+            sliced.map((product) => (
               <Grid item xs={3} key={product.id}>
                 <div className={classes.productDiv}>
                   <img
@@ -173,7 +158,9 @@ const ProductItems = () => {
                         {product.title}
                       </p>
                     </Link>
-                    <p className={classes.productPrice}>${product.price}.00</p>
+                    <p className={classes.productPrice}>
+                      {product.price}.00pkr
+                    </p>
                   </Grid>
                   <Grid item xs={2}>
                     <Link className={classes.tab} as={NavLink} to="/cart">
@@ -192,14 +179,17 @@ const ProductItems = () => {
             ))}
         </Grid>
       )}
-
-      <Pagination
-        style={{ float: "right", marginTop: "50px" }}
-        count={noOfPages}
-        color="secondary"
-        variant="outlined"
-        onChange={handleChange}
-      />
+      <div style={{ textAlign: "center", margin: "50px" }}>
+        {next === products.length || next > products.length ? (
+          <Button onClick={handleChange} className={classes.loadMore}>
+            No More Products to Load
+          </Button>
+        ) : (
+          <Button onClick={handleChange} className={classes.loadMore}>
+            LOAD MORE
+          </Button>
+        )}
+      </div>
     </div>
   );
 };
