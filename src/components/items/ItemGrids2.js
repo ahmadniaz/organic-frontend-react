@@ -11,10 +11,12 @@ const ItemGrids2 = () => {
   const classes = useStyles();
   return (
     <div className={classes.mainGrid}>
-      <Grid container style={{ flexWrap: "nowrap", marginTop: "50px" }}>
+      <Grid container xs={12} sm={12} md={12} className={classes.gridContainer}>
         <Grid
           item
-          xs={6}
+          xs={12}
+          md={6}
+          sm={12}
           className={classes.firstGrid}
           style={{
             background: `linear-gradient( rgba(0, 0, 0, 0.5) 100%, rgba(0, 0, 0, 0.5)100%),url(${boys})`,
@@ -22,9 +24,7 @@ const ItemGrids2 = () => {
             backgroundRepeat: "no-repeat",
           }}
         >
-          <div
-            style={{ position: "absolute", transform: "translate(50%, 50%)" }}
-          >
+          <div className={classes.menDiv}>
             <p
               className={classes.p1}
               style={{
@@ -44,7 +44,9 @@ const ItemGrids2 = () => {
         </Grid>
         <div style={{ padding: "3px" }}></div>
         <Grid
-          xs={6}
+          xs={12}
+          md={6}
+          sm={12}
           className={classes.secondGrid}
           style={{
             background: `linear-gradient( rgba(0, 0, 0, 0.5) 100%, rgba(0, 0, 0, 0.5)100%),url(${girls})`,
@@ -52,9 +54,7 @@ const ItemGrids2 = () => {
             backgroundRepeat: "no-repeat",
           }}
         >
-          <div
-            style={{ position: "absolute", transform: "translate(50%, 50%)" }}
-          >
+          <div className={classes.womenDiv}>
             <p
               className={classes.p1}
               style={{

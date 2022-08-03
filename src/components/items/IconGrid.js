@@ -8,16 +8,13 @@ import creditCard from "../../Assets/svg/creditCard.svg";
 import useStyles from "./itemsGridStyling";
 
 const IconGrid = () => {
- 
   const classes = useStyles();
   return (
     <>
-      <Grid container className={classes.mainGrid}>
-        <Grid item xs={3} style={{ display: "flex" }}>
-          <div>
+      <Grid container xs={12} sm={6} md={12} className={classes.mainGrid}>
+        <Grid item xs={6} sm={6} md={6} lg={3} className={classes.iconGrid}>
+          <div style={{ display: "block" }}>
             <img alt="Truck" src={FreeDelivery} style={{ height: "50px" }} />
-          </div>
-          <div>
             <p
               className={classes.p2}
               style={{ marginBottom: "2px", fontWeight: "bold" }}
@@ -32,11 +29,9 @@ const IconGrid = () => {
             </p>
           </div>
         </Grid>
-        <Grid item xs={3} style={{ display: "flex" }}>
-          <div>
+        <Grid item  xs={6} sm={6} md={6} lg={3} className={classes.iconGrid}>
+          <div style={{ display: "block" }}>
             <img alt="Truck" src={warranty} style={{ height: "50px" }} />
-          </div>
-          <div>
             <p
               className={classes.p2}
               style={{ marginBottom: "2px", fontWeight: "bold" }}
@@ -51,11 +46,9 @@ const IconGrid = () => {
             </p>
           </div>
         </Grid>
-        <Grid item xs={3} style={{ display: "flex" }}>
-          <div>
+        <Grid item  xs={6} sm={6} md={6} lg={3} className={classes.iconGrid}>
+          <div style={{ display: "block" }}>
             <img alt="Truck" src={headphones} style={{ height: "50px" }} />
-          </div>
-          <div>
             <p
               className={classes.p2}
               style={{ marginBottom: "2px", fontWeight: "bold" }}
@@ -70,11 +63,9 @@ const IconGrid = () => {
             </p>
           </div>
         </Grid>
-        <Grid item xs={3} style={{ display: "flex" }}>
-          <div>
+        <Grid item  xs={6} sm={6} md={6} lg={3} className={classes.iconGrid}>
+          <div style={{ display: "block" }}>
             <img alt="Truck" src={creditCard} style={{ height: "50px" }} />
-          </div>
-          <div>
             <p
               className={classes.p2}
               style={{ marginBottom: "2px", fontWeight: "bold" }}
