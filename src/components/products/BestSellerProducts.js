@@ -17,6 +17,8 @@ const BestSellerProducts = () => {
     //eslint-disable-next-line
   }, []);
 
+  const num = 1;
+
   const classes = useStyles();
   return (
     <div className={classes.mainGrid}>
@@ -28,7 +30,7 @@ const BestSellerProducts = () => {
               className={classes.FirstHeading}
               style={{ fontSize: "18px", fontWeight: 500, marginTop: 0 }}
             >
-              The best selling products that will make your products organic
+              The best selling products of our clothing store
             </p>
           </div>
           <div>
@@ -40,46 +42,47 @@ const BestSellerProducts = () => {
       </Grid>
 
       <Grid container spacing={3}>
-        {products.slice(0, 8).map((product) => (
-          <Grid item xs={3} key={product.id}>
-            <div className={classes.productDiv}>
-              <img
-                alt="product1"
-                src={`http://localhost:1337${product.image.url}`}
-                style={{ width: "95%" }}
-              />
-            </div>
-            <div style={{ display: "flex" }}>
-              <Grid item xs={10}>
-                <Link
-                  className={classes.tab}
-                  as={NavLink}
-                  to="/productdescription"
-                >
-                  <p
-                    className={classes.productTitle}
-                    onClick={() => handleProductClick(product)}
+        {products.data &&
+          products.data.slice(0, 8).map((product) => (
+            <Grid item xs={3} key={product.attributes.title}>
+              <div className={classes.productDiv}>
+                <img
+                  alt="product1"
+                  src={`${product.attributes.image.data.attributes.url}`}
+                  style={{ width: "95%" }}
+                />
+              </div>
+              <div style={{ display: "flex" }}>
+                <Grid item xs={10}>
+                  <Link
+                    className={classes.tab}
+                    as={NavLink}
+                    to="/productdescription"
                   >
-                    {product.title}
+                    <p
+                      className={classes.productTitle}
+                      onClick={() => handleProductClick(product)}
+                    >
+                      {product.attributes.title}
+                    </p>
+                  </Link>
+                  <p className={classes.productPrice}>
+                    {product.attributes.price}.00pkr
                   </p>
-                </Link>
-                <p className={classes.productPrice}>{product.price}.00pkr</p>
-              </Grid>
-              <Grid item xs={2}>
-                <Link className={classes.tab} as={NavLink} to="/cart">
-                  <img
-                    alt="Cart Icon"
-                    className={classes.bagIcon}
-                    src={BuyIcon}
-                    onClick={() =>
-                      handleAddToCart(product.id, product.quantity)
-                    }
-                  />
-                </Link>
-              </Grid>
-            </div>
-          </Grid>
-        ))}
+                </Grid>
+                <Grid item xs={2}>
+                  <Link className={classes.tab} as={NavLink} to="/cart">
+                    <img
+                      alt="Cart Icon"
+                      className={classes.bagIcon}
+                      src={BuyIcon}
+                      onClick={() => handleAddToCart(product.id, num)}
+                    />
+                  </Link>
+                </Grid>
+              </div>
+            </Grid>
+          ))}
       </Grid>
     </div>
   );

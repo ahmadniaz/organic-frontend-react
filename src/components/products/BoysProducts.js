@@ -26,8 +26,11 @@ const BoysProducts = () => {
     clicked,
     handleClickState,
     clearFilter,
-    handleAddToCart,
+    handleAddToCartBoys,
+  
   } = productContext;
+
+  const num = 1;
 
   const [products, setProducts] = useState([]);
 
@@ -36,7 +39,9 @@ const BoysProducts = () => {
 
   const getProducts = async () => {
     setLoading(true);
-    const res = await axios.get(`http://localhost:1337/boys`);
+    const res = await axios.get(
+      `https://enigmatic-island-20911.herokuapp.com/api/boys?populate=%2A`
+    );
     setProducts(res.data);
     setLoading(false);
   };
@@ -51,7 +56,7 @@ const BoysProducts = () => {
     setNext(next + productLimit);
   };
 
-  const sliced = products.slice(0, next);
+  const sliced = products.data && products.data.slice(0, next);
 
   const handleSort = (e) => {
     e.preventDefault();
@@ -134,13 +139,13 @@ const BoysProducts = () => {
         <Loader />
       ) : (
         <Grid container spacing={3}>
-          {products &&
+          {products.data &&
             sliced.map((product) => (
-              <Grid item xs={3} key={product.id}>
+              <Grid item xs={3} key={product.attributes.id}>
                 <div className={classes.productDiv}>
                   <img
                     alt="product1"
-                    src={`http://localhost:1337${product.image.url}`}
+                    src={`${product.attributes.image.data.attributes.url}`}
                     style={{ width: "95%" }}
                   />
                 </div>
@@ -155,11 +160,11 @@ const BoysProducts = () => {
                         className={classes.productTitle}
                         onClick={() => handleProductClick(product)}
                       >
-                        {product.title}
+                        {product.attributes.title}
                       </p>
                     </Link>
                     <p className={classes.productPrice}>
-                      {product.price}.00pkr
+                      {product.attributes.price}.00pkr
                     </p>
                   </Grid>
                   <Grid item xs={2}>
@@ -168,9 +173,7 @@ const BoysProducts = () => {
                         alt="Cart Icon"
                         className={classes.bagIcon}
                         src={BuyIcon}
-                        onClick={() =>
-                          handleAddToCart(product.id, product.quantity)
-                        }
+                        onClick={() => handleAddToCartBoys(product.id, num)}
                       />
                     </Link>
                   </Grid>
@@ -180,9 +183,15 @@ const BoysProducts = () => {
         </Grid>
       )}
       <div style={{ textAlign: "center", margin: "50px" }}>
-        <Button onClick={handleChange} className={classes.loadMore}>
-          LOAD MORE
-        </Button>
+        {next === products.length || next > products.length ? (
+          <Button onClick={handleChange} className={classes.loadMore}>
+            No More Products to Load
+          </Button>
+        ) : (
+          <Button onClick={handleChange} className={classes.loadMore}>
+            LOAD MORE
+          </Button>
+        )}
       </div>
     </div>
   );

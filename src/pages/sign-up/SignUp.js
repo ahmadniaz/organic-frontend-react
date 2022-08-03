@@ -12,6 +12,8 @@ import useStyles from "./signupStyling";
 
 const SignUp = () => {
   const history = useHistory();
+
+  
   const showError = (message) => {
     toast.error(message, {
       position: "bottom-center",
@@ -26,7 +28,8 @@ const SignUp = () => {
       pauseOnFocusLoss: false,
     });
   };
- 
+  
+
   const classes = useStyles();
 
   return (
@@ -59,14 +62,14 @@ const SignUp = () => {
           onSubmit={async (values, { setSubmitting }) => {
             try {
               await axios.post(
-                "http://localhost:1337/auth/local/register",
+                "https://enigmatic-island-20911.herokuapp.com/api/auth/local/register",
                 values
               );
               history.push("/login");
             } catch (error) {
               if (error.code === "auth/network-request-failed")
                 showError("Check your internet connection!");
-              else showError("Email already is use!");
+              else showError(error, "this is error");
             } finally {
               setSubmitting(false);
             }

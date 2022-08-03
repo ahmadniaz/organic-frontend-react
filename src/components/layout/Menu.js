@@ -1,20 +1,19 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useLocation } from "react-router-dom";
 import { useHistory } from "react-router";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
-import { theme } from "../Theme";
 import Badge from "@material-ui/core/Badge";
 import Grid from "@material-ui/core/Grid";
-import LogoCropped from "../../Assets/LogoCropped.png";
+import EZclothing from "../../Assets/ezclothing.svg";
+import WhiteLogo from "../../Assets/ezclothing-white.svg";
 import { withStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
-import SearchIcon from "../../Assets/svg/SearchIcon.svg";
 import { NavLink, Link } from "react-router-dom";
 import Breadcrumb from "../breadcrumb/Breadcrumb";
 import ProductContext from "../../context/productContext/productContext";
 import Cart from "../../Assets/Cart.png";
+import WhiteCart from "../../Assets/whiteBag.png";
 import MenuItem from "@mui/material/MenuItem";
 import Tooltip from "@mui/material/Tooltip";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -51,8 +50,6 @@ const MainMenu = () => {
   const userContext = useContext(UserContext);
   const { handleLogout } = userContext;
   const { cartItems } = productContext;
-  const [upperCase, setUpperCase] = useState("");
-  const [isOpen, setIsOpen] = useState(false);
   const [localUser, setLocalUser] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
   const [fix, setFix] = useState(false);
@@ -82,14 +79,6 @@ const MainMenu = () => {
     setAnchorEl(!anchorEl);
   };
 
-  const location = useLocation();
-  const path = location.pathname;
-  useEffect(() => {
-    const page = path.split("/").pop();
-    setUpperCase(page.toUpperCase());
-    //eslint-disable-next-line
-  }, [path]);
-
   const setFixed = () => {
     if (window.scrollY >= 30) {
       setFix(true);
@@ -107,26 +96,65 @@ const MainMenu = () => {
           <AppBar position="fixed" className={classes.bar}>
             <Toolbar disableGutters className={fix ? classes.fixedNav : ""}>
               <div className={classes.logo}>
-                <img
-                  alt="company logo"
-                  style={{ marginTop: "20px" }}
-                  src={LogoCropped}
-                />
+                <Link
+                  className={fix ? classes.onScrolltab : classes.tab}
+                  as={NavLink}
+                  to="/"
+                >
+                  <img
+                    alt="company logo"
+                    style={{ marginTop: "20px", height: "90%", width: "90%" }}
+                    src={fix ? WhiteLogo : EZclothing}
+                  />
+                </Link>
               </div>
               <div className={classes.link}>
-                <Link className={classes.tab} as={NavLink} to="/">
+                <Link
+                  className={fix ? classes.onScrolltab : classes.tab}
+                  as={NavLink}
+                  to="/"
+                >
                   {" "}
                   Home{" "}
                 </Link>
-                <Link className={classes.tab} as={NavLink} to="/about">
+                <Link
+                  className={fix ? classes.onScrolltab : classes.tab}
+                  as={NavLink}
+                  to="/men"
+                >
                   {" "}
-                  About{" "}
+                  Mens{" "}
                 </Link>
-                <Link className={classes.tab} as={NavLink} to="/store">
+                <Link
+                  className={fix ? classes.onScrolltab : classes.tab}
+                  as={NavLink}
+                  to="/boys"
+                >
                   {" "}
-                  Store{" "}
+                  Boys
                 </Link>
-                <Link className={classes.tab} as={NavLink} to="/contact">
+                <Link
+                  className={fix ? classes.onScrolltab : classes.tab}
+                  as={NavLink}
+                  to="/women"
+                >
+                  {" "}
+                  Women
+                </Link>
+                <Link
+                  className={fix ? classes.onScrolltab : classes.tab}
+                  as={NavLink}
+                  to="/girls"
+                >
+                  {" "}
+                  Girls
+                </Link>
+
+                <Link
+                  className={fix ? classes.onScrolltab : classes.tab}
+                  as={NavLink}
+                  to="/contact"
+                >
                   {" "}
                   Contact{" "}
                 </Link>
@@ -144,7 +172,9 @@ const MainMenu = () => {
                       </Avatar>
                     </IconButton>
                   </Tooltip>
-                  {localUser.user.username.toUpperCase()}
+                  <span style={fix ? { color: "white" } : { color: "black" }}>
+                    {localUser.user.username.toUpperCase()}
+                  </span>
                   <Menu
                     anchorEl={anchorEl}
                     open={open}
@@ -192,50 +222,38 @@ const MainMenu = () => {
                   </Menu>
                 </>
               ) : (
-                <Link className={classes.tab} as={NavLink} to="/login">
+                <Link
+                  className={fix ? classes.onScrolltab : classes.tab}
+                  as={NavLink}
+                  to="/login"
+                >
                   Login
                 </Link>
               )}
-
-              {isOpen ? (
-                <div>
-                  <img
-                    alt="Search Icon"
-                    src={SearchIcon}
-                    className={classes.cart}
-                    onClick={() => setIsOpen(!isOpen)}
-                  />
-                  <input
-                    style={{
-                      borderRadius: "15px",
-                      borderColor: theme.palette.secondary.main,
-                      boderSize: "0px",
-                    }}
-                    type="text"
-                    placeholder="search...."
-                  />
-                </div>
-              ) : (
-                <img
-                  alt="Search Icon"
-                  src={SearchIcon}
-                  className={classes.cart}
-                  onClick={() => setIsOpen(!isOpen)}
-                />
-              )}
-              <Link className={classes.tab} as={NavLink} to="/cart">
+              <Link
+                className={fix ? classes.onScrolltab : classes.tab}
+                as={NavLink}
+                to="/cart"
+              >
                 <IconButton aria-label="cart" style={{ marginRight: "2%" }}>
                   <StyledBadge
                     badgeContent={cartItems.length}
                     color="secondary"
                   >
-                    <img alt="Cart Icon" src={Cart} />
+                    {fix ? (
+                      <img
+                        alt="Cart Icon"
+                        src={WhiteCart}
+                        style={{ height: "40px" }}
+                      />
+                    ) : (
+                      <img alt="Cart Icon" src={Cart} />
+                    )}
                   </StyledBadge>
                 </IconButton>
               </Link>
             </Toolbar>
             <h1 className={fix ? classes.fixedNav : classes.pageName}>
-              {upperCase}
               <Breadcrumb />
             </h1>
           </AppBar>

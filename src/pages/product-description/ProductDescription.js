@@ -28,6 +28,8 @@ const ProductDescription = () => {
     }
   };
 
+  console.log(curProd, "current product");
+
   // useEffect(() => {
   //     const localProducts = JSON.parse(localStorage.getItem("curProd")) || [];
   //     setCurProd(localProducts)
@@ -46,20 +48,23 @@ const ProductDescription = () => {
   //     localStorage.clear()
   // }
 
- 
   const classes = useStyles();
   return (
     <div className={classes.mainDiv}>
       <Grid container spacing={3} style={{ display: "contents" }}>
         <div>
-          <h1 className={classes.title}>{curProd && curProd.title}</h1>
+          <h1 className={classes.title}>
+            {curProd && curProd.attributes.title}
+          </h1>
         </div>
         <div style={{ display: "flex" }}>
           <Grid item xs={5}>
             <div className={classes.productDiv}>
               <img
                 alt="product1"
-                src={`http://localhost:1337${curProd && curProd.image.url}`}
+                src={`${
+                  curProd && curProd.attributes.image.data.attributes.url
+                }`}
                 style={{ width: "75%" }}
               />
             </div>
@@ -71,7 +76,7 @@ const ProductDescription = () => {
               </div>
               <div>
                 <p className={classes.paragraph}>
-                  {curProd && curProd.description}
+                  {curProd && curProd.attributes.description}
                 </p>
               </div>
               <div style={{ display: "flex" }}>
@@ -97,7 +102,10 @@ const ProductDescription = () => {
                 <Grid item xs={3} style={{ marginLeft: "2%" }}>
                   <h3 className={classes.quantity}>
                     PRICE:
-                    <span className={classes.span}> {curProd.price}pkr </span>
+                    <span className={classes.span}>
+                      {" "}
+                      {curProd && curProd.attributes.price}pkr{" "}
+                    </span>
                   </h3>
                 </Grid>
                 <Grid
@@ -109,7 +117,9 @@ const ProductDescription = () => {
                     <Button
                       variant="outlined"
                       className={classes.button}
-                      onClick={() => handleAddToCart(curProd.id, value, total)}
+                      onClick={() =>
+                        handleAddToCart(curProd && curProd.id, value, total)
+                      }
                     >
                       <span> ADD TO CART </span>
                     </Button>

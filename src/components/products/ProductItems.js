@@ -30,14 +30,17 @@ const ProductItems = () => {
   } = productContext;
 
   const [products, setProducts] = useState([]);
-
   const [loading, setLoading] = useState(false);
   const [next, setNext] = useState(productLimit);
+  const num = 1;
 
   const getProducts = async () => {
     setLoading(true);
-    const res = await axios.get(`http://localhost:1337/products`);
-    setProducts(res.data);
+    const res = await axios.get(
+      `https://enigmatic-island-20911.herokuapp.com/api/products?populate=%2A`
+    );
+
+    setProducts(res.data.data);
     setLoading(false);
   };
 
@@ -51,7 +54,7 @@ const ProductItems = () => {
     setNext(next + productLimit);
   };
 
-  const sliced = products.slice(0, next);
+  const sliced = products && products.slice(0, next);
 
   const handleSort = (e) => {
     e.preventDefault();
@@ -61,28 +64,34 @@ const ProductItems = () => {
   useEffect(() => {
     let filteredProducts = products;
     if (sort !== "Sort By") {
-      filteredProducts = filteredProducts.sort((a, b) =>
-        b.created_at.localeCompare(a.created_at)
-      );
+      filteredProducts =
+        filteredProducts &&
+        filteredProducts.sort(
+          (a, b) =>
+            b &&
+            b.attributes.created_at.localeCompare(a && a.attributes.created_at)
+        );
     } else if (sort === "Sort By") {
       filteredProducts = products;
     }
     if (clicked) {
       if (category !== "all") {
-        filteredProducts = filteredProducts.filter(
-          (product) => product.categories[0].name === category
-        );
+        filteredProducts =
+          filteredProducts &&
+          filteredProducts.filter(
+            (product) => product.attributes.categories[0].name === category
+          );
       }
       if (min !== "") {
-        filteredProducts = filteredProducts.filter(
-          (product) => product.price > min
-        );
+        filteredProducts =
+          filteredProducts &&
+          filteredProducts.filter((product) => product.attributes.price > min);
       }
 
       if (max !== "") {
-        filteredProducts = filteredProducts.filter(
-          (product) => product.price < max
-        );
+        filteredProducts =
+          filteredProducts &&
+          filteredProducts.filter((product) => product.attributes.price < max);
       }
       handleClickState();
     }
@@ -100,7 +109,7 @@ const ProductItems = () => {
       <Grid container>
         <Grid item xs={12} style={{ display: "flex", marginTop: "50px" }}>
           <Grid item xs={6}>
-            <Grid item xs={12}>
+            <Grid item xs={6}>
               <p className={classes.firstHeading} style={{ fontSize: "26px" }}>
                 All Products
               </p>
@@ -136,11 +145,11 @@ const ProductItems = () => {
         <Grid container spacing={3}>
           {products &&
             sliced.map((product) => (
-              <Grid item xs={3} key={product.id}>
+              <Grid item xs={3} key={product.attributes.id}>
                 <div className={classes.productDiv}>
                   <img
                     alt="product1"
-                    src={`http://localhost:1337${product.image.url}`}
+                    src={`${product.attributes.image.data.attributes.url}`}
                     style={{ width: "95%" }}
                   />
                 </div>
@@ -155,11 +164,11 @@ const ProductItems = () => {
                         className={classes.productTitle}
                         onClick={() => handleProductClick(product)}
                       >
-                        {product.title}
+                        {product.attributes.title}
                       </p>
                     </Link>
                     <p className={classes.productPrice}>
-                      {product.price}.00pkr
+                      {product.attributes.price}.00pkr
                     </p>
                   </Grid>
                   <Grid item xs={2}>
@@ -168,9 +177,7 @@ const ProductItems = () => {
                         alt="Cart Icon"
                         className={classes.bagIcon}
                         src={BuyIcon}
-                        onClick={() =>
-                          handleAddToCart(product.id, product.quantity)
-                        }
+                        onClick={() => handleAddToCart(product.id, num)}
                       />
                     </Link>
                   </Grid>

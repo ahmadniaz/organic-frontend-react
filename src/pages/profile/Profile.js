@@ -1,15 +1,11 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { Grid, Box, Typography, Button } from "@material-ui/core";
 import PersonIcon from "@material-ui/icons/Person";
-import HistoryIcon from "@material-ui/icons/History";
-import TrendingFlatIcon from "@material-ui/icons/TrendingFlat";
 import LogoutIcon from "@mui/icons-material/Logout";
 import UserContext from "../../context/usercontext/userContext";
 import { useHistory } from "react-router";
 
 import useStyles from "./profileStyling";
-
 
 const Profile = () => {
   const userContext = useContext(UserContext);
@@ -21,7 +17,6 @@ const Profile = () => {
     const token = localStorage.getItem("user");
     const tokenData = JSON.parse(token);
     setLocalUser(tokenData);
-    console.log(localUser, "user in APP");
     //eslint-disable-next-line
   }, []);
 
@@ -29,7 +24,7 @@ const Profile = () => {
     handleLogout();
     history.push("/login");
   };
-  
+
   const classes = useStyles();
   return (
     <>
@@ -54,7 +49,6 @@ const Profile = () => {
                 <Box className={classes.account_icons}>
                   <Box style={{ display: "flex", padding: "1rem" }}>
                     <PersonIcon style={{ marginRight: "6px" }} />
-                    {/* {console.log("local user in profile line 97 ", localUser)} */}
                     <Typography>
                       {localUser && localUser.user.username.toUpperCase()}
                     </Typography>
@@ -64,11 +58,6 @@ const Profile = () => {
                     <LogoutIcon fontSize="small" />
                     logout
                   </Button>
-
-                  <Box style={{ display: "flex", padding: "1rem" }}>
-                    <HistoryIcon style={{ marginRight: "6px" }} />
-                    <Typography>Order history</Typography>
-                  </Box>
                 </Box>
               </Box>
             </Grid>
@@ -110,7 +99,6 @@ const Profile = () => {
                     display: "flex",
                     paddingTop: "1rem",
                     paddingBottom: "1rem",
-                    textTransform: "capitalize",
                   }}
                 >
                   <Typography variant="body1">e-mail:</Typography>
@@ -118,16 +106,8 @@ const Profile = () => {
                     variant="body1"
                     style={{ fontWeight: "bold", marginLeft: "1rem" }}
                   >
-                    {localUser.user.email}
+                    {localUser.user.email.toLowerCase()}
                   </Typography>
-                </Box>
-                <Box style={{ marginTop: "2rem" }}>
-                  <>
-                    <Link to="/settings" className={classes.btn2}>
-                      change account information
-                      <TrendingFlatIcon fontSize="medium" />
-                    </Link>
-                  </>
                 </Box>
               </Box>
             </Grid>

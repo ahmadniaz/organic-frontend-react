@@ -21,6 +21,8 @@ import {
   SET_LOADING,
   CART_INCREMENT,
   CART_DECREMENT,
+  CHECKOUT_CLICK,
+  CHECKOUT_SUCCESS
 } from "../types";
 
 const ProductState = (props) => {
@@ -37,14 +39,16 @@ const ProductState = (props) => {
     num: 0,
     cartItems: [],
     total: 0,
+    checkoutProducts: [],
   };
   const [state, dispatch] = useReducer(productReducer, initialState);
 
   const getProducts = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:1337/products`
+        `https://enigmatic-island-20911.herokuapp.com/api/products?populate=%2A`
       );
+
       dispatch({
         type: GET_PRODUCTS,
         payload: res.data,
@@ -120,6 +124,18 @@ const ProductState = (props) => {
     });
   };
 
+  //for getting the cart data
+
+  const handleCheckoutClick = (cartItems, total) => {
+    dispatch({
+      type: CHECKOUT_CLICK,
+      payload: {
+        checkoutItems: cartItems,
+        total,
+      },
+    });
+  };
+
   //For increasing products
   const doIncrement = async (num, clickedProduct) => {
     dispatch({
@@ -160,17 +176,105 @@ const ProductState = (props) => {
       payload: e.target.value,
     });
   };
-  // Handling Add To Cart Button Click
+  // Handling Add To Cart Products Click
   const handleAddToCart = async (id, num, total) => {
     try {
       setLoading();
       const res = await axios.get(
-        `http://localhost:1337/products/${id}`
+        `https://enigmatic-island-20911.herokuapp.com/api/products/${id}?populate=*`
       );
+
       dispatch({
         type: ADD_TO_CART,
         payload: {
-          product: res.data,
+          product: res.data.data,
+          num,
+          total,
+        },
+      });
+    } catch {
+      console.log("this is not working");
+    }
+  };
+
+  // Handling Add To Cart Men Click
+  const handleAddToCartMen = async (id, num, total) => {
+    console.log(id, "product id");
+    try {
+      setLoading();
+      const res = await axios.get(
+        `https://enigmatic-island-20911.herokuapp.com/api/men/${id}?populate=*`
+      );
+
+      dispatch({
+        type: ADD_TO_CART,
+        payload: {
+          product: res.data.data,
+          num,
+          total,
+        },
+      });
+    } catch {
+      console.log("this is not working");
+    }
+  };
+
+  // Handling Add To Cart Boys Click
+  const handleAddToCartBoys = async (id, num, total) => {
+    try {
+      setLoading();
+      const res = await axios.get(
+        `https://enigmatic-island-20911.herokuapp.com/api/boys/${id}?populate=*`
+      );
+
+      dispatch({
+        type: ADD_TO_CART,
+        payload: {
+          product: res.data.data,
+          num,
+          total,
+        },
+      });
+    } catch {
+      console.log("this is not working");
+    }
+  };
+
+  // Handling Add To Cart Girls Click
+  const handleAddToCartGirls = async (id, num, total) => {
+
+    try {
+      setLoading();
+      const res = await axios.get(
+        `https://enigmatic-island-20911.herokuapp.com/api/girls/${id}?populate=*`
+      );
+
+      dispatch({
+        type: ADD_TO_CART,
+        payload: {
+          product: res.data.data,
+          num,
+          total,
+        },
+      });
+    } catch {
+      console.log("this is not working");
+    }
+  };
+
+  // Handling Add To Cart Women Click
+  const handleAddToCartWomen = async (id, num, total) => {
+ 
+    try {
+      setLoading();
+      const res = await axios.get(
+        `https://enigmatic-island-20911.herokuapp.com/api/women/${id}?populate=*`
+      );
+
+      dispatch({
+        type: ADD_TO_CART,
+        payload: {
+          product: res.data.data,
           num,
           total,
         },
@@ -219,6 +323,16 @@ const ProductState = (props) => {
       },
     });
   };
+
+
+
+  const onCheckoutSuccess=()=>{
+    dispatch({
+      type:CHECKOUT_SUCCESS
+    })
+  }
+
+
   return (
     <ProductContext.Provider
       value={{
@@ -235,6 +349,7 @@ const ProductState = (props) => {
         num: state.num,
         cartItems: state.cartItems,
         loading: state.loading,
+        checkoutProducts: state.checkoutProducts,
         getProducts,
         sortProducts,
         setLoading,
@@ -252,6 +367,12 @@ const ProductState = (props) => {
         removeCartItem,
         doCartIncrement,
         doCartDecrement,
+        handleCheckoutClick,
+        handleAddToCartWomen,
+        handleAddToCartGirls,
+        handleAddToCartBoys,
+        handleAddToCartMen,
+        onCheckoutSuccess
       }}
     >
       {props.children}

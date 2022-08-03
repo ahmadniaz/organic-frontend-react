@@ -17,7 +17,7 @@ const Testimonials = () => {
               className={classes.firstHeading}
               style={{ fontSize: "18px", fontWeight: 500, marginTop: 0 }}
             >
-              Have a look what our clients say about our Organic Products
+              Have a look what our clients say about our Products
             </p>
           </div>
         </Grid>

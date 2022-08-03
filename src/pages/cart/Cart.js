@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import ProductContext from "../../context/productContext/productContext";
 import DeleteIcon from "../../Assets/DeleteIcon.png";
@@ -6,10 +7,7 @@ import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 import EmptyCart from "../../components/emptycart/emptyCart";
 import NewsLetter from "../../components/newsletter/NewsLetter";
-
-import { Button } from "@material-ui/core";
-import { Link, NavLink } from "react-router-dom";
-
+import Button from "react-bootstrap/esm/Button";
 import useStyles from "./cartStyling";
 
 const Cart = () => {
@@ -22,6 +20,7 @@ const Cart = () => {
     removeCartItem,
     loading,
     total,
+    handleCheckoutClick,
   } = productContext;
   useEffect(() => {
     //eslint-disable-next-line
@@ -69,8 +68,9 @@ const Cart = () => {
                     <div className={classes.productDiv}>
                       <img
                         alt="product1"
-                        src={`http://localhost:1337${
-                          item && item.product.image.url
+                        src={`${
+                          item &&
+                          item.product.attributes.image.data.attributes.url
                         }`}
                         style={{ width: "95%" }}
                       />
@@ -78,7 +78,7 @@ const Cart = () => {
                   </Grid>
                   <Grid item xs={3} style={{ alignSelf: "center" }}>
                     <h1 className={classes.title}>
-                      {item && item.product.title}
+                      {item && item.product.attributes.title}
                     </h1>
                   </Grid>
                 </Grid>
@@ -111,7 +111,7 @@ const Cart = () => {
                   <Grid item xs={1} style={{ alignSelf: "center" }}>
                     <h1 className={classes.price}>
                       {" "}
-                      {item && item.product.price}.00 pkr
+                      {item && item.product.attributes.price}.00 pkr
                     </h1>
                   </Grid>
                   <Grid item xs={2} style={{ textAlign: "center" }}>
@@ -138,12 +138,8 @@ const Cart = () => {
               <h1 className={classes.total}>{total}.00 pkr</h1>
             </Grid>
           </Grid>
-          <Link className={classes.tab} as={NavLink} to="/checkout">
-            <Button
-              variant="contained"
-              color="secondary"
-              style={{ textAlign: "center", marginTop: "5%", borderRadius: "" }}
-            >
+          <Link to="/checkout">
+            <Button onClick={() => handleCheckoutClick(cartItems, total)}>
               Checkout
             </Button>
           </Link>

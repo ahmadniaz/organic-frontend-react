@@ -5,8 +5,14 @@ const useStyles = makeStyles((theme) => ({
     ...theme.mixins.toolbar,
     marginBottom: "4em",
   },
+
+  mainGrid: {
+    marginTop: "100px",
+    backgroundColor: "black",
+  },
   logo: {
     height: "8em",
+    marginLeft: "40px",
   },
   bar: {
     marginTop: 0,
@@ -17,17 +23,32 @@ const useStyles = makeStyles((theme) => ({
   tab: {
     ...theme.typography.secondary,
     minWidth: 10,
-    marginLeft: "25px",
+    marginRight: "30px",
     textDecoration: "none",
     color: theme.palette.secondary.main,
+  },
+  onScrolltab: {
+    ...theme.typography.secondary,
+    minWidth: 10,
+    marginRight: "30px",
+    textDecoration: "none",
+    color: "white",
   },
   footerTab: {
     ...theme.typography.secondary,
     minWidth: 10,
     display: "block",
     textDecoration: "none",
-    color: theme.palette.secondary.main,
+    color: "#0a58ca",
     fontSize: "16px",
+    "&:hover": {
+      color: "white",
+    },
+  },
+  copyright: {
+    color: "white",
+    marginBottom: "0",
+    textAlign: "center",
   },
 
   cart: {
@@ -44,10 +65,10 @@ const useStyles = makeStyles((theme) => ({
     ...theme.typography.secondary,
     fontSize: "42px",
     fontWeight: "bold",
-    color: theme.palette.secondary.main,
+    color: "white",
   },
   fixedNav: {
-    backgroundColor: "#29C7B6",
+    backgroundColor: "black",
     transition: ".3s ease-in-out",
   },
 
@@ -57,12 +78,12 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "25px",
     textDecoration: "none",
     fontWeight: "bold",
-    color: theme.palette.secondary.main,
+    color: "white",
     transform: "translate(-200%, -35px)",
   },
   firstHeading: {
     ...theme.typography.primary,
-    color: theme.palette.secondary.main,
+    color: "white",
     fontWeight: "bold",
     letterSpacing: "1px",
     fontSize: "26px",
@@ -70,15 +91,18 @@ const useStyles = makeStyles((theme) => ({
   },
   firstPara: {
     ...theme.typography.primary,
-    color: theme.palette.secondary.main,
+    color: "white",
     letterSpacing: "1px",
     fontSize: "22px",
     fontWeight: "bold",
   },
   secondPara: {
     ...theme.typography.secondary,
-    color: theme.palette.secondary.main,
+    color: "white",
     fontSize: "12px",
+  },
+  bottomDiv: {
+    backgroundColor: "black",
   },
   icons: {
     display: "flex",
@@ -89,7 +113,6 @@ const useStyles = makeStyles((theme) => ({
     width: "20px",
     height: "20px",
   },
-
 }));
 
 export default useStyles;

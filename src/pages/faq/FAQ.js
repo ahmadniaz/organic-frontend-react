@@ -12,7 +12,7 @@ const FAQs = () => {
 
             <h3 className={classes.heading}>Effective Date:6 Nov 2020</h3>
 
-            <h3 className={classes.heading}>Hello and Welcome to the Organic Privacy Policies</h3>
+            <h3 className={classes.heading}>Hello and Welcome to the Privacy Policies</h3>
 
             <p className={classes.paragraph}>Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                 Molestias aut, repellat ipsum facere voluptate dicta obcaecati deserunt nobis suscipit eaque?

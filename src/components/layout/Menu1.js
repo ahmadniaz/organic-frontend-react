@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useLocation } from "react-router";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -22,22 +22,9 @@ function ElevationScroll(props) {
 }
 
 export default function Menu(props) {
-  const [upperCase, setUpperCase] = useState("");
-  // const getPageName = () => {
-  //   const path = window.location.pathname;
-  //   console.log(path, "path");
-  //   const page = path.split("/").pop();
-  //   console.log(page, "page");
-  //   setUpperCase(page.toUpperCase());
-  // };
-
   const location = useLocation();
   const path = location.pathname;
-  useEffect(() => {
-    const page = path.split("/").pop();
-    setUpperCase(page.toUpperCase());
-    //eslint-disable-next-line
-  }, [path]);
+
   const classes = useStyles();
   return (
     <Grid container>
@@ -63,9 +50,7 @@ export default function Menu(props) {
                 </p>
               </Link>
             </div>
-            <div className={classes.link}>
-              <h1 className={classes.pageName}>{upperCase}</h1>
-            </div>
+
             <div>
               {path === "/login" ? (
                 <Link className={classes.tab} as={NavLink} to="/signup">

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Breadcrumbs as MUIBreadcrumbs,
   Link,
@@ -8,24 +8,44 @@ import { withRouter } from "react-router-dom";
 import { theme } from "../Theme";
 
 const Breadcrumbs = (props) => {
+  const [fix, setFix] = useState(false);
+
   const {
     history,
     location: { pathname },
   } = props;
   const pathnames = pathname.split("/").filter((x) => x);
+
+  const setFixed = () => {
+    if (window.scrollY >= 30) {
+      setFix(true);
+    } else {
+      setFix(false);
+    }
+  };
+  window.addEventListener("scroll", setFixed);
+
   return (
     <MUIBreadcrumbs
-      style={{ marginLeft: "5%" }}
+      style={{ marginLeft: "5%", color: "red" }}
       separator="›"
       aria-label="breadcrumb"
     >
       {pathnames.length > 0 ? (
         <Link
-          style={{
-            color: theme.palette.secondary.main,
-            ...theme.typography.secondary,
-            cursor: "pointer",
-          }}
+          style={
+            fix
+              ? {
+                  color: "white",
+                  ...theme.typography.secondary,
+                  cursor: "pointer",
+                }
+              : {
+                  color: theme.palette.secondary.main,
+                  ...theme.typography.secondary,
+                  cursor: "pointer",
+                }
+          }
           onClick={() => history.push("/")}
         >
           Home
@@ -49,7 +69,7 @@ const Breadcrumbs = (props) => {
             }}
             key={name}
           >
-            {name}
+            {name.slice(0, 1).toUpperCase() + name.slice(1, name.length)}
           </Typography>
         ) : (
           <Link

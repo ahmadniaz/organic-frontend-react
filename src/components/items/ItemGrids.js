@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import { Button } from "@material-ui/core";
 import men from "../../Assets/men.webp";
@@ -33,8 +34,9 @@ const ItemGrids = () => {
             >
               MEN COLLECTION
             </p>
-
-            <Button className={classes.firstGridButton}>BROWSE</Button>
+            <Link to="/men" style={{ textDecoration: "none" }}>
+              <Button className={classes.firstGridButton}>BROWSE</Button>
+            </Link>
           </div>
         </Grid>
         <div style={{ padding: "3px" }}></div>
@@ -59,8 +61,9 @@ const ItemGrids = () => {
             >
               WOMEN COLLECTION
             </p>
-
-            <Button className={classes.firstGridButton}>BROWSE</Button>
+            <Link to="/women" style={{ textDecoration: "none" }}>
+              <Button className={classes.firstGridButton}>BROWSE</Button>
+            </Link>
           </div>
         </Grid>
       </Grid>

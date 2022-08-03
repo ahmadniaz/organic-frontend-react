@@ -42,7 +42,6 @@ const ToggleFilter = () => {
 
   const handleCategoryChange = (e) => {
     e.preventDefault();
-    console.log(e.target.value);
     handleCategory(e.target.value);
   };
 
@@ -61,29 +60,9 @@ const ToggleFilter = () => {
                     src={x}
                     className={classes.icons}
                   />
-                  <FormControl
-                    className={classes.formControl}
-                    style={{ marginTop: 20 }}
-                  >
-                    <InputLabel id="demo-simple-select-label">
-                      category
-                    </InputLabel>
-                    <Select
-                      value={category}
-                      onChange={handleCategoryChange}
-                      labelId="demo-simple-select-label"
-                      id="demo-simple-select"
-                    >
-                      <MenuItem value="all">all</MenuItem>
-                      <MenuItem value="Mens">Mens</MenuItem>
-                      <MenuItem value="Women">Women</MenuItem>
-                      <MenuItem value="Boys">Boys</MenuItem>
-                      <MenuItem value="Girls">Girls</MenuItem>
-                    </Select>
-                  </FormControl>
 
                   <p
-                    style={{ minWidth: "150px" }}
+                    style={{ minWidth: "150px", alignSelf: "flex-end" }}
                     className={classes.firstHeading}
                   >
                     Price Range
@@ -105,13 +84,34 @@ const ToggleFilter = () => {
                     type="number"
                     onChange={onMaxChange}
                   />
-                  <Grid item xs>
+                  <Grid item style={{ width: "150px", alignSelf: "flex-end" }}>
                     <Button
                       onClick={() => clearFilter()}
                       className={classes.clear}
                     >
                       CLEAR ALL
                     </Button>
+                  </Grid>
+                  <Grid item xs={3}>
+                    <Grid item xs={12} style={{ display: "flex" }}>
+                      <Grid item xs={11}>
+                        <p
+                          className={classes.firstHeading}
+                          style={{ float: "right", marginRight: "15px" }}
+                        >
+                          FILTER
+                        </p>
+                      </Grid>
+                      <Grid item xs={1}>
+                        <img
+                          alt="Search Icon"
+                          src={SearchIcon}
+                          className={classes.icons}
+                          onClick={() => handleFilterClick()}
+                          style={{ marginTop: "25px" }}
+                        />
+                      </Grid>
+                    </Grid>
                   </Grid>
                 </Grid>
               ) : (
@@ -135,28 +135,6 @@ const ToggleFilter = () => {
                   </Grid>
                 </>
               )}
-            </Grid>
-          </Grid>
-
-          <Grid item xs={3}>
-            <Grid item xs={12} style={{ display: "flex" }}>
-              <Grid item xs={11}>
-                <p
-                  className={classes.firstHeading}
-                  style={{ float: "right", marginRight: "15px" }}
-                >
-                  Search Products
-                </p>
-              </Grid>
-              <Grid item xs={1}>
-                <img
-                  alt="Search Icon"
-                  src={SearchIcon}
-                  className={classes.icons}
-                  onClick={() => handleFilterClick()}
-                  style={{ marginTop: "25px" }}
-                />
-              </Grid>
             </Grid>
           </Grid>
         </Grid>

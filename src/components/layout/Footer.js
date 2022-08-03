@@ -5,20 +5,32 @@ import facebook from "../../Assets/svg/facebook.svg";
 import instagram from "../../Assets/svg/instagram.svg";
 import twitter from "../../Assets/svg/twitter.svg";
 import youtube from "../../Assets/svg/youtube.svg";
-import WaveBottom from "../../Assets/WaveBottom.png";
-
+import WhiteLogo from "../../Assets/ezclothing-white.svg";
 import useStyles from "./layoutStyling";
 
 const Footer = () => {
   const classes = useStyles();
   return (
-    <div className={classes.mainGrid} style={{ marginTop: "100px" }}>
+    <div className={classes.mainGrid}>
       <Grid
         container
-        style={{ width: "90%", marginLeft: "auto", marginRight: "auto" }}
+        style={{
+          width: "90%",
+          marginLeft: "auto",
+          marginRight: "auto",
+          textAlign: "-webkit-center",
+        }}
       >
-        <Grid item xs={3}>
-          <p className={classes.firstHeading}>EZ CLOTHING</p>
+        <Grid item xs={3} style={{ marginTop: "3%" }}>
+          <div style={{ height: "100px" }}>
+            <Link className={classes.tab} as={NavLink} to="/">
+              <img
+                alt="company logo"
+                style={{ width: "90%", height: "90%" }}
+                src={WhiteLogo}
+              />
+            </Link>
+          </div>
           <p className={classes.secondPara}>
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestias
             aut, repellat ipsum facere voluptate dicta obcaecati deserunt nobis
@@ -39,21 +51,25 @@ const Footer = () => {
             {" "}
             Home{" "}
           </Link>
-          <Link className={classes.footerTab} as={NavLink} to="/about">
+          <Link className={classes.footerTab} as={NavLink} to="/men">
             {" "}
-            About{" "}
+            Men{" "}
+          </Link>
+          <Link className={classes.footerTab} as={NavLink} to="/women">
+            {" "}
+            Women{" "}
+          </Link>
+          <Link className={classes.footerTab} as={NavLink} to="/boys">
+            {" "}
+            Boys{" "}
+          </Link>
+          <Link className={classes.footerTab} as={NavLink} to="/girls">
+            {" "}
+            Girls{" "}
           </Link>
           <Link className={classes.footerTab} as={NavLink} to="/store">
             {" "}
             Store{" "}
-          </Link>
-          <Link className={classes.footerTab} as={NavLink} to="/login">
-            {" "}
-            Login
-          </Link>
-          <Link className={classes.footerTab} as={NavLink} to="/signup">
-            {" "}
-            Sign Up
           </Link>
           <Link className={classes.footerTab} as={NavLink} to="/contact">
             {" "}
@@ -88,33 +104,10 @@ const Footer = () => {
           <p className={classes.footerTab}> ask@ezclothing.com</p>
         </Grid>
       </Grid>
-      <div className={classes.bottomDiv}>
-        <Grid container className={classes.mainGrid}>
-          <Grid item xs={12}>
-            <div>
-              <div>
-                <div>
-                  <img
-                    alt="Bottom wave"
-                    src={WaveBottom}
-                    style={{ width: "1519px", position: "relative" }}
-                  />
-                  <p
-                    className={classes.footerTab}
-                    style={{
-                      position: "absolute",
-                      transform: "translate(-50%, -100%)",
-                      left: "50%",
-                    }}
-                  >
-                    COPYRIGHTS.&copy;2022. EZ CLOTHING. ALL RIGHTS RESERVED
-                  </p>
-                </div>
-              </div>
-            </div>
-          </Grid>
-        </Grid>
-      </div>
+      <hr style={{ color: "white", height: "2px" }}></hr>
+      <p className={classes.copyright}>
+        COPYRIGHTS.&copy;2022. EZ CLOTHING. ALL RIGHTS RESERVED
+      </p>
     </div>
   );
 };

@@ -48,6 +48,8 @@ const ItemGrids2 = () => {
           className={classes.secondGrid}
           style={{
             background: `linear-gradient( rgba(0, 0, 0, 0.5) 100%, rgba(0, 0, 0, 0.5)100%),url(${girls})`,
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
           }}
         >
           <div
@@ -64,8 +66,9 @@ const ItemGrids2 = () => {
             >
               GIRLS COLLECTION
             </p>
-
-            <Button className={classes.firstGridButton}>BROWSE</Button>
+            <Link to="/girls" style={{ textDecoration: "none" }}>
+              <Button className={classes.firstGridButton}>BROWSE</Button>
+            </Link>
           </div>
         </Grid>
       </Grid>

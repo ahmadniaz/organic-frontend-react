@@ -32,12 +32,14 @@ const UserState = (props) => {
     const { email, password } = values;
 
     try {
-      const response = await axios.post("http://localhost:1337/auth/local/", {
-        identifier: email,
-        password,
-        withCredentials: true,
-      });
-      console.log(response, "response is working");
+      const response = await axios.post(
+        "https://enigmatic-island-20911.herokuapp.com/api/auth/local/",
+        {
+          identifier: email,
+          password,
+          withCredentials: true,
+        }
+      );
       localStorage.setItem("user", JSON.stringify(response.data));
       dispatch({
         type: LOGIN_SUCCESS,

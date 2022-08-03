@@ -1,39 +1,48 @@
 import React, { useEffect, useState } from "react";
-import UpArrow from '../../Assets/UpArrow.png';
+import UpArrow from "../../Assets/UpArrow.png";
 export default function ScrollToTop() {
-    const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
-    // Show button when page is scorlled upto given distance
-    const toggleVisibility = () => {
-        if (window.pageYOffset > 400) {
-            setIsVisible(true);
-        } else {
-            setIsVisible(false);
-        }
-    };
+  // Show button when page is scorlled upto given distance
+  const toggleVisibility = () => {
+    if (window.pageYOffset > 400) {
+      setIsVisible(true);
+    } else {
+      setIsVisible(false);
+    }
+  };
 
-    // Set the top cordinate to 0
-    // make scrolling smooth
-    const scrollToTop = () => {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-    };
+  // Set the top cordinate to 0
+  // make scrolling smooth
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
-    useEffect(() => {
-        window.addEventListener("scroll", toggleVisibility);
-    }, []);
+  useEffect(() => {
+    window.addEventListener("scroll", toggleVisibility);
+  }, []);
 
-    return (
-        <div className="scroll-to-top">
-            {isVisible &&
-                <div onClick={scrollToTop}>
-                    <img alt="Up Arrow" src={UpArrow} style={{
-                        width: '100px',
-                        position: 'fixed', bottom: '15%', right: '8%', zIndex: 100, cursor: 'pointer'
-                    }} />
-                </div>}
+  return (
+    <div className="scroll-to-top">
+      {isVisible && (
+        <div onClick={scrollToTop}>
+          <img
+            alt="Up Arrow"
+            src={UpArrow}
+            style={{
+              width: "100px",
+              position: "fixed",
+              bottom: "3%",
+              right: "2%",
+              zIndex: 100,
+              cursor: "pointer",
+            }}
+          />
         </div>
-    );
+      )}
+    </div>
+  );
 }

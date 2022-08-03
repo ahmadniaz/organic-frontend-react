@@ -17,7 +17,7 @@ const TermsOfServices = () => {
       <h3 className={classes.heading}>Effective Date:6 Nov 2020</h3>
 
       <h3 className={classes.heading}>
-        Hello and Welcome to the Organic Privacy Policies
+        Hello and Welcome to the Privacy Policies
       </h3>
 
       <p className={classes.paragraph}>

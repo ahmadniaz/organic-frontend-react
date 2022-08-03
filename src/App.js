@@ -16,8 +16,10 @@ import TermsOfServices from "./pages/terms/TermsOfServices";
 import FAQs from "./pages/faq/FAQ";
 import PrivacyPolicy from "./pages/privacy-policy/PrivacyPolicy";
 import Home from "./pages/home/Home";
-import About from "./pages/about/About";
 import Boys from "./pages/boys/Boys";
+import Girls from "./pages/girls/Girls";
+import Women from "./pages/women/Women";
+import Men from "./pages/men/Men";
 import Login from "./pages/login/Login";
 import SignUp from "./pages/sign-up/SignUp";
 import Contact from "./pages/contact/Contact";
@@ -53,9 +55,12 @@ const App = () => {
               {localUser || user ? <MainMenu /> : <Menu1 />}
               <Switch>
                 <Route exact path="/" component={Home} />
-                <Route path="/about" component={About} />
                 <Route path="/store" component={Store} />
+                <Route path="/men" component={Men} />
                 <Route path="/boys" component={Boys} />
+                <Route path="/women" component={Women} />
+                <Route path="/girls" component={Girls} />
+
                 <Route
                   path="/productdescription"
                   component={ProductDescription}
