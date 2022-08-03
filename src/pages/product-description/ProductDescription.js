@@ -13,7 +13,6 @@ const ProductDescription = () => {
   const productContext = useContext(ProductContext);
   const { clickedProduct, handleInputChange, handleAddToCart, total } =
     productContext;
-  const [curProd, setCurProd] = useState(clickedProduct);
   const [value, setValue] = useState(1);
 
   const doIncrement = () => {
@@ -28,25 +27,7 @@ const ProductDescription = () => {
     }
   };
 
-  console.log(curProd, "current product");
-
-  // useEffect(() => {
-  //     const localProducts = JSON.parse(localStorage.getItem("curProd")) || [];
-  //     setCurProd(localProducts)
-
-  // }, []);
-
-  // useEffect(() => {
-
-  //     if (clickedProduct) {
-  //         localStorage.setItem("curProd", JSON.stringify(curProd || []));
-  //     }
-  //     //eslint-disable-next-line
-  // }, []);
-  // window.onunload = () => {
-  //     // Clear the local storage
-  //     localStorage.clear()
-  // }
+  console.log(clickedProduct, "current product");
 
   const classes = useStyles();
   return (
@@ -54,7 +35,7 @@ const ProductDescription = () => {
       <Grid container spacing={3} style={{ display: "contents" }}>
         <div>
           <h1 className={classes.title}>
-            {curProd && curProd.attributes.title}
+            {clickedProduct && clickedProduct.attributes.title}
           </h1>
         </div>
         <div style={{ display: "flex" }}>
@@ -63,7 +44,8 @@ const ProductDescription = () => {
               <img
                 alt="product1"
                 src={`${
-                  curProd && curProd.attributes.image.data.attributes.url
+                  clickedProduct &&
+                  clickedProduct.attributes.image.data.attributes.url
                 }`}
                 style={{ width: "75%" }}
               />
@@ -76,7 +58,7 @@ const ProductDescription = () => {
               </div>
               <div>
                 <p className={classes.paragraph}>
-                  {curProd && curProd.attributes.description}
+                  {clickedProduct && clickedProduct.attributes.description}
                 </p>
               </div>
               <div style={{ display: "flex" }}>
@@ -104,7 +86,8 @@ const ProductDescription = () => {
                     PRICE:
                     <span className={classes.span}>
                       {" "}
-                      {curProd && curProd.attributes.price}pkr{" "}
+                      {clickedProduct &&
+                        clickedProduct.attributes.price}pkr{" "}
                     </span>
                   </h3>
                 </Grid>
@@ -118,7 +101,11 @@ const ProductDescription = () => {
                       variant="outlined"
                       className={classes.button}
                       onClick={() =>
-                        handleAddToCart(curProd && curProd.id, value, total)
+                        handleAddToCart(
+                          clickedProduct && clickedProduct.id,
+                          value,
+                          total
+                        )
                       }
                     >
                       <span> ADD TO CART </span>

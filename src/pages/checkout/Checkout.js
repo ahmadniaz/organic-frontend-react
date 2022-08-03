@@ -22,7 +22,6 @@ function Checkout() {
   return (
     <Row style={{ gutterX: 0 }}>
       <Col style={{ paddingRight: 0 }} sm={{ size: 3, order: 1, offset: 2 }}>
-        <h1 style={{ margin: 80 }}></h1>
         <CartComponent />
       </Col>
       <Col style={{ paddingLeft: 5 }} sm={{ size: 6, order: 2 }}>

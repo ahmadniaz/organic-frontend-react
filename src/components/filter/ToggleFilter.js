@@ -1,10 +1,7 @@
 import React, { useState, useContext, useRef } from "react";
 import Grid from "@material-ui/core/Grid";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import InputLabel from "@material-ui/core/InputLabel";
+
 import Button from "@material-ui/core/Button";
-import MenuItem from "@material-ui/core/MenuItem";
 import ProductContext from "../../context/productContext/productContext";
 
 import filterIcon from "../../Assets/svg/filterIcon.svg";
@@ -18,8 +15,8 @@ const ToggleFilter = () => {
   const {
     handleMinChange,
     handleMaxChange,
-    handleCategory,
-    category,
+    
+  
     handleFilterClick,
     clearFilter,
     min,
@@ -40,10 +37,7 @@ const ToggleFilter = () => {
     }
   };
 
-  const handleCategoryChange = (e) => {
-    e.preventDefault();
-    handleCategory(e.target.value);
-  };
+
 
   const classes = useStyles();
   return (

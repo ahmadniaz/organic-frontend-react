@@ -1,7 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { useHistory } from "react-router";
-// import { GoogleLogin, GoogleLogout } from "react-google-login";
-// import FacebookLogin from "react-facebook-login";
 
 import { Link, NavLink } from "react-router-dom";
 import { Formik, Form } from "formik";
@@ -13,40 +11,11 @@ import UserContext from "../../context/usercontext/userContext";
 
 import useStyles from "./loginStyling";
 
-// const clientId =
-//   "24636475881-mkr9q94rl59gsqjlubaimme9efres0nb.apps.googleusercontent.com";
-
 const Login = () => {
   const history = useHistory();
-  // const [showloginButton, setShowloginButton] = useState(true);
-  // const [showlogoutButton, setShowlogoutButton] = useState(false);
 
   const userContext = useContext(UserContext);
   const { handleSubmit } = userContext;
-
-  // const onLoginSuccess = (res) => {
-  //   console.log("Login Success:", res.profileObj);
-  //   setShowloginButton(false);
-  //   setShowlogoutButton(true);
-  // };
-
-  // const onLoginFailure = (res) => {
-  //   console.log("Login Failed:", res);
-  // };
-
-  // const onSignoutSuccess = () => {
-  //   alert("You have been logged out successfully");
-  //   console.clear();
-  //   setShowloginButton(true);
-  //   setShowlogoutButton(false);
-  // };
-
-  //   const responseFacebook = (response) => {
-  //     console.log(response);
-  //   };
-  //   const componentClicked = () => {
-  //     console.log("clicked");
-  //   };
 
   const classes = useStyles();
 
@@ -119,39 +88,7 @@ const Login = () => {
           ></div>
         </div>
       </div>
-      <div style={{ textAlignLast: "center", marginTop: "3%" }}>
-        {/* {showloginButton ? (
-          <GoogleLogin
-            clientId={clientId}
-            onClick={() =>
-              (window.location = "http://localhost:1337/connect/google")
-            }
-            buttonText="Continue With Google"
-            onSuccess={onLoginSuccess}
-            onFailure={onLoginFailure}
-            cookiePolicy={"single_host_origin"}
-            isSignedIn={true}
-          />
-        ) : null}
-
-        {showlogoutButton ? (
-          <GoogleLogout
-            clientId={clientId}
-            buttonText="Sign Out"
-            onLogoutSuccess={onSignoutSuccess}
-          ></GoogleLogout>
-        ) : null} */}
-
-        {/* <FacebookLogin
-          appId="239817504782304"
-          autoLoad={true}
-          fields="name,email,picture"
-          callback={responseFacebook}
-          onClick={componentClicked}
-          cssClass="my-facebook-button-class"
-          icon="fa-facebook"
-        /> */}
-      </div>
+      <div style={{ textAlignLast: "center", marginTop: "3%" }}></div>
       <Link className={classes.tab} as={NavLink} to="/signup">
         <h3 className={classes.heading}>CAN'T SIGNIN?</h3>
       </Link>
