@@ -25,6 +25,7 @@ import UserContext from "../../context/usercontext/userContext";
 
 import useStyles from "./layoutStyling";
 
+// This is a default Material UI function copied from documents
 function ElevationScroll(props) {
   const { children } = props;
   const trigger = useScrollTrigger({
@@ -80,13 +81,16 @@ const MainMenu = () => {
   };
 
   const setFixed = () => {
-    if (window.scrollY >= 30) {
+    if (window.scrollY >= 20) {
       setFix(true);
     } else {
       setFix(false);
     }
   };
   window.addEventListener("scroll", setFixed);
+
+
+
 
   const classes = useStyles();
   return (
@@ -168,7 +172,7 @@ const MainMenu = () => {
                       sx={{ ml: 2 }}
                     >
                       <Avatar sx={{ width: 32, height: 32 }}>
-                        {localUser.user.username.charAt(0)}
+                        {localUser.user.username.charAt(0).toUpperCase()}
                       </Avatar>
                     </IconButton>
                   </Tooltip>

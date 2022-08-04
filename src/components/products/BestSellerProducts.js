@@ -41,6 +41,7 @@ const BestSellerProducts = () => {
         </Grid>
       </Grid>
 
+
       <Grid container spacing={3}>
         {products.data &&
           products.data.slice(0, 8).map((product) => (

@@ -1,5 +1,6 @@
 import { makeStyles } from "@material-ui/styles";
 
+//default function name of material UI
 const useStyles = makeStyles((theme) => ({
   mainDiv: {
     backgroundColor: "rgba(0, 0, 0, 0)",

@@ -142,7 +142,6 @@ const productReducer = (state, action) => {
       };
 
     case ADD_TO_CART:
-     
       let productExist = state.cartItems.find(
         (item) =>
           action.payload.product.id === item.product.id &&
@@ -157,6 +156,7 @@ const productReducer = (state, action) => {
         let newTotal =
           state.total +
           action.payload.product.attributes.price * action.payload.num;
+
         return {
           ...state,
           cartItems: state.cartItems,
@@ -189,7 +189,7 @@ const productReducer = (state, action) => {
       return {
         ...state,
         cartItems: [],
-        total:0
+        total: 0,
       };
 
     default:

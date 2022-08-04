@@ -1,10 +1,6 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
 import { NavLink, Link } from "react-router-dom";
-import facebook from "../../Assets/svg/facebook.svg";
-import instagram from "../../Assets/svg/instagram.svg";
-import twitter from "../../Assets/svg/twitter.svg";
-import youtube from "../../Assets/svg/youtube.svg";
 import WhiteLogo from "../../Assets/ezclothing-white.svg";
 import useStyles from "./layoutStyling";
 
@@ -37,12 +33,6 @@ const Footer = () => {
             suscipit eaque? Lorem, ipsum dolor sit amet consectetur adipisicing
             elit.
           </p>
-          <div className={classes.icons}>
-            <img className={classes.iconSize} alt="Facebook" src={facebook} />
-            <img className={classes.iconSize} alt="instagram" src={instagram} />
-            <img className={classes.iconSize} alt="TWITTER" src={twitter} />
-            <img className={classes.iconSize} alt="YOUTUBE" src={youtube} />
-          </div>
         </Grid>
 
         <Grid item xs={3} style={{ textAlign: "center" }}>
