@@ -60,7 +60,7 @@ const SignUp = () => {
           onSubmit={async (values, { setSubmitting }) => {
             try {
               await axios.post(
-                "https://backend-ezclothing.herokuapp.com/api/auth/local/register",
+                "https://enigmatic-island-20911.herokuapp.com/api/auth/local/register",
                 values
               );
               history.push("/login");
