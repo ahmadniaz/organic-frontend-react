@@ -33,7 +33,7 @@ const UserState = (props) => {
 
     try {
       const response = await axios.post(
-        "https://ezclothing-backend.herokuapp.com/api/auth/local/",
+        "https://backend-ezclothing.herokuapp.com/api/auth/local/",
         {
           identifier: email,
           password,

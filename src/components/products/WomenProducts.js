@@ -39,7 +39,7 @@ const WomenProducts = () => {
   const getProducts = async () => {
     setLoading(true);
     const res = await axios.get(
-      `https://ezclothing-backend.herokuapp.com/api/women?populate=%2A`
+      `https://backend-ezclothing.herokuapp.com/api/women?populate=%2A`
     );
     setProducts(res.data);
     setLoading(false);

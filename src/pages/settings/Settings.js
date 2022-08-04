@@ -59,7 +59,7 @@ const Settings = () => {
           onSubmit={async (values, { setSubmitting }) => {
             try {
               await axios.post(
-                "https://ezclothing-backend.herokuapp.com/api/auth/local/register",
+                "https://backend-ezclothing.herokuapp.com/api/auth/local/register",
                 values
               );
               history.push("/login");
