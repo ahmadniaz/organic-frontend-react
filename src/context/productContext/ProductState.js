@@ -46,7 +46,7 @@ const ProductState = (props) => {
   const getProducts = async () => {
     try {
       const res = await axios.get(
-        `https://enigmatic-island-20911.herokuapp.com/api/products?populate=%2A`
+        `https://ezclothing-backend.herokuapp.com/api/products?populate=%2A`
       );
 
       dispatch({
@@ -181,7 +181,7 @@ const ProductState = (props) => {
     try {
       setLoading();
       const res = await axios.get(
-        `https://enigmatic-island-20911.herokuapp.com/api/products/${id}?populate=*`
+        `https://ezclothing-backend.herokuapp.com/api/products/${id}?populate=*`
       );
 
       dispatch({
@@ -203,7 +203,7 @@ const ProductState = (props) => {
     try {
       setLoading();
       const res = await axios.get(
-        `https://enigmatic-island-20911.herokuapp.com/api/men/${id}?populate=*`
+        `https://ezclothing-backend.herokuapp.com/api/men/${id}?populate=*`
       );
 
       dispatch({
@@ -224,7 +224,7 @@ const ProductState = (props) => {
     try {
       setLoading();
       const res = await axios.get(
-        `https://enigmatic-island-20911.herokuapp.com/api/boys/${id}?populate=*`
+        `https://ezclothing-backend.herokuapp.com/api/boys/${id}?populate=*`
       );
 
       dispatch({
@@ -246,7 +246,7 @@ const ProductState = (props) => {
     try {
       setLoading();
       const res = await axios.get(
-        `https://enigmatic-island-20911.herokuapp.com/api/girls/${id}?populate=*`
+        `https://ezclothing-backend.herokuapp.com/api/girls/${id}?populate=*`
       );
 
       dispatch({
@@ -268,7 +268,7 @@ const ProductState = (props) => {
     try {
       setLoading();
       const res = await axios.get(
-        `https://enigmatic-island-20911.herokuapp.com/api/women/${id}?populate=*`
+        `https://ezclothing-backend.herokuapp.com/api/women/${id}?populate=*`
       );
 
       dispatch({

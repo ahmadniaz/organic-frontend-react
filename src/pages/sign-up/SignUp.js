@@ -13,7 +13,6 @@ import useStyles from "./signupStyling";
 const SignUp = () => {
   const history = useHistory();
 
-  
   const showError = (message) => {
     toast.error(message, {
       position: "bottom-center",
@@ -28,7 +27,6 @@ const SignUp = () => {
       pauseOnFocusLoss: false,
     });
   };
-  
 
   const classes = useStyles();
 
@@ -62,7 +60,7 @@ const SignUp = () => {
           onSubmit={async (values, { setSubmitting }) => {
             try {
               await axios.post(
-                "https://enigmatic-island-20911.herokuapp.com/api/auth/local/register",
+                "https://ezclothing-backend.herokuapp.com/api/auth/local/register",
                 values
               );
               history.push("/login");

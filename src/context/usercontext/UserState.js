@@ -33,7 +33,7 @@ const UserState = (props) => {
 
     try {
       const response = await axios.post(
-        "https://enigmatic-island-20911.herokuapp.com/api/auth/local/",
+        "https://ezclothing-backend.herokuapp.com/api/auth/local/",
         {
           identifier: email,
           password,
