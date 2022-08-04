@@ -22,28 +22,8 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "20px",
     marginLeft: "10%",
     borderBottom: "1px solid #03235a",
-    width: "16%",
+    width: "19%",
     padding: "1%",
-    display: "inline",
-    backgroundColor: "white",
-    "&::placeholder": {
-      color: "grey",
-      opacity: 0.3,
-    },
-    "&:focus": {
-      border: "none",
-      outline: "none",
-      borderBottom: "1px solid #03235A",
-    },
-  },
-
-  inputBlock: {
-    border: "0px",
-    fontSize: "20px",
-    marginLeft: "10%",
-    borderBottom: "1px solid #03235a",
-
-    padding: "2%",
     display: "inline",
     backgroundColor: "white",
     "&::placeholder": {
@@ -62,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "20px",
     marginLeft: "10%",
     borderBottom: "1px solid #03235a",
-    width: "42%",
+    width: "47%",
     padding: "1%",
     backgroundColor: "white",
     "&::placeholder": {
@@ -77,16 +57,16 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     ...theme.typography.secondary,
-    backgroundColor: theme.palette.primary.light,
-    color: theme.palette.secondary.main,
+    backgroundColor: "white",
+    color: "black",
     letterSpacing: "1px",
     marginLeft: "10%",
-    marginTop: "8%",
+    marginTop: "4%",
     borderRadius: "50px",
-    padding: "1% 13% 1% 13%",
+    padding: "1% 8% 1% 8%",
     "&:hover": {
-      backgroundColor: theme.palette.secondary.main,
-      color: theme.palette.secondary.light,
+      backgroundColor: "black",
+      color: "white",
     },
   },
 }));

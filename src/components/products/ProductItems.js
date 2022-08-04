@@ -8,10 +8,6 @@ import Loader from "react-spinners/PropagateLoader";
 import { Button } from "@material-ui/core";
 import ToggleFilter from "../filter/ToggleFilter";
 import { Link, NavLink } from "react-router-dom";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
 
 const ProductItems = () => {
   const productLimit = 8;
@@ -113,28 +109,6 @@ const ProductItems = () => {
               <p className={classes.firstHeading} style={{ fontSize: "26px" }}>
                 All Products
               </p>
-            </Grid>
-          </Grid>
-
-          <Grid item xs={6}>
-            <Grid item xs={12} style={{ display: "flex", marginLeft: "50%" }}>
-              <Grid item xs={5} style={{ alignSelf: "flex-end" }}>
-                <p className={classes.firstHeading}>Sort by:</p>
-              </Grid>
-              <Grid item xs={7}>
-                <FormControl
-                  style={{ minWidth: "150px" }}
-                  className={classes.formControl}
-                >
-                  <InputLabel id="demo-simple-select-label">sort by</InputLabel>
-                  <Select value={sort} onChange={handleSort}>
-                    <MenuItem value="Latest Products">
-                      {" "}
-                      Latest Products
-                    </MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
             </Grid>
           </Grid>
         </Grid>

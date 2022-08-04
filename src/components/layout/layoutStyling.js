@@ -78,8 +78,17 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "25px",
     textDecoration: "none",
     fontWeight: "bold",
+    color: theme.palette.secondary.main,
+    transform: "translate(0, 25px)",
+  },
+  scrollh1: {
+    ...theme.typography.secondary,
+    minWidth: 10,
+    marginLeft: "25px",
+    textDecoration: "none",
+    fontWeight: "bold",
     color: "white",
-    transform: "translate(-200%, -35px)",
+    transform: "translate(0, 25px)",
   },
   firstHeading: {
     ...theme.typography.primary,

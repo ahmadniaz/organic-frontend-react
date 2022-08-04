@@ -90,7 +90,10 @@ const Login = () => {
       </div>
       <div style={{ textAlignLast: "center", marginTop: "3%" }}></div>
       <Link className={classes.tab} as={NavLink} to="/signup">
-        <h3 className={classes.heading}>CAN'T SIGNIN?</h3>
+        <h3 className={classes.heading}>
+          Don't have an Account?{" "}
+          <span style={{ textDecoration: "underline" }}>SIGNUP</span>
+        </h3>
       </Link>
     </div>
   );

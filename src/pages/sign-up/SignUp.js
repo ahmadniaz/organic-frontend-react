@@ -122,7 +122,10 @@ const SignUp = () => {
           </Link>
         </p>
         <Link className={classes.tab} as={NavLink} to="/login">
-          <h3 className={classes.heading}>ALREADY HAVE AN ACCOUNT?SIGNIN</h3>
+          <h3 className={classes.heading}>
+            Already have an account ?{" "}
+            <span style={{ textDecoration: "underline" }}>LOGIN</span>
+          </h3>
         </Link>
       </div>
     </div>

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import banner2 from "../../../Assets/banner2.webp";
 import { Button } from "@material-ui/core";
 
@@ -13,9 +14,11 @@ const Slide2 = () => {
         className={classes.mainDiv}
         style={{ backgroundImage: `url(${banner2})` }}
       >
-        <Button variant="outlined" className={classes.button}>
-          <span> CHECK BOYS CLOTHES </span>
-        </Button>
+        <Link to="/boys">
+          <Button variant="outlined" className={classes.button}>
+            <span> CHECK BOYS CLOTHES </span>
+          </Button>
+        </Link>
       </div>
     </div>
   );

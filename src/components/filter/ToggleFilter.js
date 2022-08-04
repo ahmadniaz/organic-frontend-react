@@ -15,8 +15,7 @@ const ToggleFilter = () => {
   const {
     handleMinChange,
     handleMaxChange,
-    
-  
+
     handleFilterClick,
     clearFilter,
     min,
@@ -36,8 +35,6 @@ const ToggleFilter = () => {
       handleMaxChange(e.target.value);
     }
   };
-
-
 
   const classes = useStyles();
   return (
@@ -86,26 +83,22 @@ const ToggleFilter = () => {
                       CLEAR ALL
                     </Button>
                   </Grid>
-                  <Grid item xs={3}>
-                    <Grid item xs={12} style={{ display: "flex" }}>
-                      <Grid item xs={11}>
-                        <p
-                          className={classes.firstHeading}
-                          style={{ float: "right", marginRight: "15px" }}
-                        >
-                          FILTER
-                        </p>
-                      </Grid>
-                      <Grid item xs={1}>
-                        <img
-                          alt="Search Icon"
-                          src={SearchIcon}
-                          className={classes.icons}
-                          onClick={() => handleFilterClick()}
-                          style={{ marginTop: "25px" }}
-                        />
-                      </Grid>
+                  <Grid item style={{ display: "flex" }}>
+                    <Grid item xs={1}>
+                      <img
+                        alt="Search Icon"
+                        src={SearchIcon}
+                        className={classes.icons}
+                        onClick={() => handleFilterClick()}
+                        style={{ marginTop: "25px" }}
+                      />
                     </Grid>
+                    <p
+                      className={classes.firstHeading}
+                      style={{ float: "right", marginLeft: "15px" }}
+                    >
+                      FILTER
+                    </p>
                   </Grid>
                 </Grid>
               ) : (

@@ -43,7 +43,7 @@ const Contact = () => {
 
         <div>
           <input
-            className={classes.inputBlock}
+            className={classes.input}
             type="email"
             name="email"
             value={email}
@@ -52,7 +52,7 @@ const Contact = () => {
             required
           />
           <input
-            className={classes.inputBlock}
+            className={classes.input}
             type="text"
             name="subject"
             value={subject}
@@ -73,7 +73,9 @@ const Contact = () => {
             cols={25}
           />
         </div>
-        <Button className={classes.button}> SEND </Button>
+        <div>
+          <Button className={classes.button}> SEND </Button>
+        </div>
       </div>
     </div>
   );

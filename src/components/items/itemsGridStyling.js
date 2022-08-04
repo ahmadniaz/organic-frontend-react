@@ -9,59 +9,20 @@ const useStyles = makeStyles((theme) => ({
   gridContainer: {
     flexWrap: "nowrap",
     marginTop: "50px",
-    [theme.breakpoints.down("sm")]: {
-      flexWrap: "wrap",
-    },
-    [theme.breakpoints.up("sm")]: {
-      flexWrap: "wrap",
-    },
-    [theme.breakpoints.up("md")]: {
-      flexWrap: "nowrap",
-    },
   },
 
   iconGrid: {
     display: "flex",
-    [theme.breakpoints.down("sm")]: {
-      display: "block",
-    },
-    [theme.breakpoints.up("sm")]: {
-      display: "block",
-    },
-    [theme.breakpoints.down("md")]: {
-      display: "block",
-    },
-    [theme.breakpoints.up("md")]: {
-      display: "flex",
-    },
   },
 
   menDiv: {
     position: "absolute",
     transform: "translate(50%, 50%)",
-    [theme.breakpoints.down("sm")]: {
-      transform: "translate(0%, 60%)",
-    },
-    [theme.breakpoints.up("sm")]: {
-      transform: "translate(30%, 60%)",
-    },
-    [theme.breakpoints.down("md")]: {
-      transform: "translate(0%, 60%)",
-    },
-    [theme.breakpoints.up("md")]: {
-      transform: "translate(0%, 60%)",
-    },
   },
 
   womenDiv: {
     position: "absolute",
     transform: "translate(50%, 50%)",
-    [theme.breakpoints.down("sm")]: {
-      transform: "translate(0%, 60%)",
-    },
-    [theme.breakpoints.up("sm")]: {
-      transform: "translate(20%, 80%)",
-    },
   },
 
   p1: {
@@ -127,13 +88,6 @@ const useStyles = makeStyles((theme) => ({
     display: "block",
     textAlign: "center",
     height: "300px",
-    [theme.breakpoints.down("sm")]: {
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-    },
-    [theme.breakpoints.up("sm")]: {
-      backgroundSize: "contain",
-    },
   },
   secondGrid: {
     backgroundSize: "cover",
@@ -142,13 +96,6 @@ const useStyles = makeStyles((theme) => ({
     display: "block",
     textAlign: "center",
     height: "300px",
-    [theme.breakpoints.down("sm")]: {
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-    },
-    [theme.breakpoints.up("sm")]: {
-      backgroundSize: "contain",
-    },
   },
   firstGridButton: {
     ...theme.typography.secondary,

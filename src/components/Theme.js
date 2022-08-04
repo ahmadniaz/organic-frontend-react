@@ -1,15 +1,6 @@
 import { createTheme } from "@material-ui/core";
 
 export const theme = createTheme({
-  breakpoints: {
-    values: {
-      xs: 0,
-      sm: 400,
-      md: 764,
-      lg: 920,
-      xl: 1200,
-    },
-  },
   palette: {
     primary: {
       main: "#29C7B6",

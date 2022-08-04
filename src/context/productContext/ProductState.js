@@ -22,7 +22,7 @@ import {
   CART_INCREMENT,
   CART_DECREMENT,
   CHECKOUT_CLICK,
-  CHECKOUT_SUCCESS
+  CHECKOUT_SUCCESS,
 } from "../types";
 
 const ProductState = (props) => {
@@ -242,7 +242,6 @@ const ProductState = (props) => {
 
   // Handling Add To Cart Girls Click
   const handleAddToCartGirls = async (id, num, total) => {
-
     try {
       setLoading();
       const res = await axios.get(
@@ -264,7 +263,6 @@ const ProductState = (props) => {
 
   // Handling Add To Cart Women Click
   const handleAddToCartWomen = async (id, num, total) => {
- 
     try {
       setLoading();
       const res = await axios.get(
@@ -324,14 +322,11 @@ const ProductState = (props) => {
     });
   };
 
-
-
-  const onCheckoutSuccess=()=>{
+  const onCheckoutSuccess = () => {
     dispatch({
-      type:CHECKOUT_SUCCESS
-    })
-  }
-
+      type: CHECKOUT_SUCCESS,
+    });
+  };
 
   return (
     <ProductContext.Provider
@@ -372,7 +367,7 @@ const ProductState = (props) => {
         handleAddToCartGirls,
         handleAddToCartBoys,
         handleAddToCartMen,
-        onCheckoutSuccess
+        onCheckoutSuccess,
       }}
     >
       {props.children}
